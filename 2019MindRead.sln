@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2019MindRead", "2019MindRead\2019MindRead.vcxproj", "{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Debug|x64.ActiveCfg = Debug|x64
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Debug|x64.Build.0 = Debug|x64
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Debug|x86.ActiveCfg = Debug|Win32
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Debug|x86.Build.0 = Debug|Win32
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Release|x64.ActiveCfg = Release|x64
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Release|x64.Build.0 = Release|x64
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Release|x86.ActiveCfg = Release|Win32
+		{3F7FD820-DEF1-48D6-8CBE-88BADB6ADC00}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {029C4791-9FB3-41C2-B5A3-506C3E4001DD}
+	EndGlobalSection
+EndGlobal
