@@ -4,7 +4,7 @@
 #define RELEASE(a) (((a)!=0) ? (delete[] (a),(a) = 0):((a)=0))
 
 #define DebguSBS true
-
+#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
 #define NLOG_DLLTAG	"[MindRead2019]"
 
 namespace MindReadFunction
@@ -40,7 +40,19 @@ namespace MindReadFunction
 		void DataLoad(String^ loadPath, array<Byte>^ loadData);
 		
 		void LoadBMP(unsigned char *_FrameBuffer);
+		void LoadBMP(array<Byte>^% _FrameBuffer);
 		void getbmpDataWH(int &width, int &height);
+
+		void SaveBmp(Drawing::Bitmap^ bmp, String^ path);
+
+		void SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
+		void SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
+		void SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
+
+		bool BGRtoY(unsigned char *BGRImage, int Width, int Height, unsigned char *YImage);
+
+		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst);
+		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst);
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");
 		int Width, Height;
