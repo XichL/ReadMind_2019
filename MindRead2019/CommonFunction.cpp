@@ -313,40 +313,21 @@ namespace MindReadFunction
 			//SaveData(YBuffer, width, height, 1, "TestY.raw");
 		}
 
-		//array<Byte>^ BChannel = gcnew array<Byte>(width*height);
-		//array<Byte>^ GChannel = gcnew array<Byte>(width*height);
-		//array<Byte>^ RChannel = gcnew array<Byte>(width*height);
-
-		//for (int i = 0; i < width*height; i++)
-		//{
-		//	BChannel[i] = Src[i * 3];
-		//	GChannel[i] = Src[i * 3 + 1];
-		//	RChannel[i] = Src[i * 3 + 2];
-		//}
-		//SaveData(GChannel, width, height, 1, "Test.bmp");
-
 		array<USHORT>^ tmpMosaic = gcnew array<USHORT>(width*height);
 
+		pin_ptr<UCHAR> ptrDst = &Dst[0];
 		for (int y = 0; y < height; y++)
 		{
 			for (int x = 0; x < width; x++)
 			{
-				//if ((y % 2 == 0) && (x % 2 == 1))
-				//	tmpMosaic[y*width + x] = RChannel[y*width + x];
-				//else if ((y % 2 == 1) && (x % 2 == 0))
-				//	tmpMosaic[y*width + x] = BChannel[y*width + x];
-				//else
-				//	tmpMosaic[y*width + x] = GChannel[y*width + x];
 				tmpMosaic[y*width + x] = YBuffer[y*width + x];
 
-				Dst[y*width + x * 2] = tmpMosaic[y*width + x] >> 8;
-				Dst[y*width + (x * 2) + 1] = tmpMosaic[y*width + x] & 0xff;
+				*ptrDst++ = tmpMosaic[y*width + x] >> 8;
+				*ptrDst++ = tmpMosaic[y*width + x];
 			}
 		}
 
-		SaveData(tmpMosaic, width, height, 1, "UCHARData.raw");
-		int a = 0;
-		a + 1;
+		SaveData(tmpMosaic, width, height, 1, "USHORT.raw");
 	}
 
 	void CommonFunction::demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst)
