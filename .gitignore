@@ -86,3 +86,4 @@ bin/x64/Debug/MindRead2019.exe.metagen
 bin/x64/Debug/MindRead2019.pdb
 bin/x64/Debug/MindRead_FunctionSet.dll.metagen
 bin/x64/Debug/MindRead_FunctionSet.pdb
+*.db
