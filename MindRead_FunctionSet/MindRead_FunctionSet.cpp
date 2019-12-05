@@ -342,4 +342,19 @@ namespace MindRead_FunctionSet
 			Dst[i] = Src[i * 2 + 1];
 		}
 	}
+	void FunctionSet::TransTo8bitASCII(String^ inputData, array<Byte>^ outputData)
+	{
+		outputData = gcnew array<Byte>(inputData->Length);
+		int count = 0;
+		for each(char a in inputData)
+		{
+			outputData[count] = a;
+			count++;
+		}
+		//throw gcnew System::NotImplementedException();
+	}
+	void FunctionSet::ASCII8bitToLetter(array<Byte>^ outputData, String^ inputData)
+	{
+		//throw gcnew System::NotImplementedException();
+	}
 }

@@ -53,6 +53,10 @@ namespace MindRead_FunctionSet
 
 		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst);
 		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst);
+
+		void TransTo8bitASCII(String^ inputData ,array<Byte>^ outputData);
+		void ASCII8bitToLetter(array<Byte>^ outputData, String^ inputData);
+
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");
 		int Width, Height;
