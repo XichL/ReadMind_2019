@@ -3,8 +3,6 @@
 
 using namespace System;
 
-
-
 namespace MindRead_FunctionSet
 {
 	FunctionSet::FunctionSet()

@@ -21,7 +21,7 @@
     <ClInclude Include="Resource.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="CommonFunction.h">
+    <ClInclude Include="MindRead2019.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,9 +38,6 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="CommonFunction.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

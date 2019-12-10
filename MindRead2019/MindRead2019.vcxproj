@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CommonFunction.h" />
+    <ClInclude Include="MindRead2019.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -150,7 +150,6 @@
   <ItemGroup>
     <ClCompile Include="MindRead2019.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="CommonFunction.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
