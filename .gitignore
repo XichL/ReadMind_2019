@@ -91,3 +91,4 @@ bin/x64/Debug/MindRead_FunctionSet.pdb
 obj/x64/Debug/DemosaicRaw.vcxprojAssemblyReference.cache
 obj/x64/Debug/EasyDecryption_ASCII.vcxprojAssemblyReference.cache
 obj/x64/Debug/EasyEncryption_ASCII.vcxprojAssemblyReference.cache
+*.db
