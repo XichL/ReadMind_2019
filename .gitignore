@@ -87,3 +87,7 @@ bin/x64/Debug/MindRead2019.pdb
 bin/x64/Debug/MindRead_FunctionSet.dll.metagen
 bin/x64/Debug/MindRead_FunctionSet.pdb
 *.db
+.vs/MindRead2019/v15/Browse.VC.db
+obj/x64/Debug/DemosaicRaw.vcxprojAssemblyReference.cache
+obj/x64/Debug/EasyDecryption_ASCII.vcxprojAssemblyReference.cache
+obj/x64/Debug/EasyEncryption_ASCII.vcxprojAssemblyReference.cache
