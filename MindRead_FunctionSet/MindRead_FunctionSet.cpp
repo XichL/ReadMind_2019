@@ -304,7 +304,7 @@ namespace MindRead_FunctionSet
 		return bRes;
 	}
 
-	void FunctionSet::mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst)
+	void FunctionSet::mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst)
 	{
 		array<Byte>^ YBuffer = gcnew array<Byte>(width*height);
 		if (channel == 3)
@@ -332,7 +332,7 @@ namespace MindRead_FunctionSet
 		SaveData(tmpMosaic, width, height, 1, "USHORT.raw");
 	}
 
-	void FunctionSet::demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst)
+	void FunctionSet::demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst)
 	{
 		array<Byte>^ lowOrder = gcnew array<Byte>(width*height);
 		for (int i = 0; i < width*height; i++)
@@ -340,18 +340,29 @@ namespace MindRead_FunctionSet
 			Dst[i] = Src[i * 2 + 1];
 		}
 	}
-	void FunctionSet::TransTo8bitASCII(String^ inputData, array<Byte>^ outputData)
+	void FunctionSet::TransTo8bitASCII(String^ inputData, array<Byte>^% outputData)
 	{
+		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
+
 		outputData = gcnew array<Byte>(inputData->Length);
 		int count = 0;
 		for each(char a in inputData)
 		{
-			outputData[count] = a;
+			//String^ tmpString = Convert::ToString(a, 16);
+			//std::string Tstring = String2string(tmpString);
+
+			//Byte ss = Convert::ToByte(tmpString);
+
+			//Byte ss = Convert::ToByte(a);
+			UCHAR ss = Convert::ToByte(Convert::ToString(a,16), 16);
+			//outputData[count] = ss;
+
+
 			count++;
 		}
 		//throw gcnew System::NotImplementedException();
 	}
-	void FunctionSet::ASCII8bitToLetter(array<Byte>^ outputData, String^ inputData)
+	void FunctionSet::ASCII8bitToLetter(array<Byte>^ outputData, String^% inputData)
 	{
 		//throw gcnew System::NotImplementedException();
 	}

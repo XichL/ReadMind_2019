@@ -6,42 +6,40 @@ using namespace MindRead_FunctionSet;
 using namespace MindRead2019Test;
 using namespace System;
 
-namespace MindRead2019Test
+[STAThreadAttribute]
+int main(array<System::String ^> ^args)
 {
-
-	[STAThreadAttribute]
-	int main(array<System::String ^> ^args)
-	{
-		MindRead2019Test::CMindRead2019Test^ funcTest = gcnew MindRead2019Test::CMindRead2019Test();
-		//----------------------------------------------------
+	FunctionSet^ MRFun = gcnew FunctionSet();
+	//----------------------------------------------------
 #if 1
-		String^ TestString = "ASCKB";
+	String^ TestString = "K";
 
-		
+	array<Byte>^ out;
+	MRFun->TransTo8bitASCII(TestString, out);
 
-		return 0;
+	return 0;
 #endif	
 
+	array<Byte>^ SrcByteBuffer;
+	MRFun->LoadBMP(SrcByteBuffer);
 
-		array<Byte>^ SrcByteBuffer;
-		funcTest->MRFun->LoadBMP(SrcByteBuffer);
+	int nWidth, nHeight;
+	MRFun->getbmpDataWH(nWidth, nHeight);
 
-		int nWidth, nHeight;
-		funcTest->MRFun->getbmpDataWH(nWidth, nHeight);
+	array<Byte>^ Bit16Buffer = gcnew array<Byte>(nWidth*nHeight * 2);
+	MRFun->mosaic(SrcByteBuffer, nWidth, nHeight, 3, Bit16Buffer);
 
-		array<Byte>^ Bit16Buffer = gcnew array<Byte>(nWidth*nHeight * 2);
-		funcTest->MRFun->mosaic(SrcByteBuffer, nWidth, nHeight, 3, Bit16Buffer);
+	MRFun->SaveData(Bit16Buffer, nWidth, nHeight, 2, "To16Buffer.raw");
 
-		funcTest->MRFun->SaveData(Bit16Buffer, nWidth, nHeight, 2, "To16Buffer.raw");
+	array<Byte>^ outputDemosaic = gcnew array<Byte>(nWidth*nHeight);
+	MRFun->demosaic(Bit16Buffer, nWidth, nHeight, 2, outputDemosaic);
+	MRFun->SaveData(outputDemosaic, nWidth, nHeight, 1, "Demosaic.raw");
 
-		array<Byte>^ outputDemosaic = gcnew array<Byte>(nWidth*nHeight);
-		funcTest->MRFun->demosaic(Bit16Buffer, nWidth, nHeight, 2, outputDemosaic);
-		funcTest->MRFun->SaveData(outputDemosaic, nWidth, nHeight, 1, "Demosaic.raw");
+	//----------------------------------------------------
+	return 0;
+}
 
-
-
-		//----------------------------------------------------
-		return 0;
-	}
+namespace MindRead2019Test
+{
 
 }

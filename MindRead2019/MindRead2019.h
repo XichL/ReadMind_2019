@@ -6,9 +6,9 @@ namespace MindRead2019Test
 
 	public ref class CMindRead2019Test
 	{
+	private:
+
 	public:
 		FunctionSet^ MRFun = gcnew FunctionSet();
-		
-
 	};
 }

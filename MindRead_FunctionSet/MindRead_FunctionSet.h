@@ -3,6 +3,8 @@
 
 #define RELEASE(a) (((a)!=0) ? (delete[] (a),(a) = 0):((a)=0))
 
+#define String2string(a) (const char*)(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(a)).ToPointer();
+
 #define DebguSBS true
 #define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
 #define NLOG_DLLTAG	"[MindReadFunctionSet]"
@@ -37,32 +39,26 @@ namespace MindRead_FunctionSet
 		bool NLogMsg(String^ Message);
 		bool NLogMsg(String^ FuncTag, String^ Message);
 
-		//Load Data相關
 		void DataLoad(String^ loadPath, array<Byte>^ loadData);
 
 		void LoadBMP(unsigned char *_FrameBuffer);
 		void LoadBMP(array<Byte>^% _FrameBuffer);
 
 
-		//Save Data相關
 		void SaveBmp(Drawing::Bitmap^ bmp, String^ path);
 
 		void SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
 		void SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
 		void SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
 
-		//Mosaic相關
-		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst);
-		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^ Dst);
-
-		//影像處理相關
+		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
+		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
 		void getbmpDataWH(int &width, int &height);
 		bool BGRtoY(unsigned char *BGRImage, int Width, int Height, unsigned char *YImage);
 
 
-		//ASCII 相關
-		void TransTo8bitASCII(String^ inputData ,array<Byte>^ outputData);
-		void ASCII8bitToLetter(array<Byte>^ outputData, String^ inputData);
+		void TransTo8bitASCII(String^ inputData ,array<Byte>^% outputData);
+		void ASCII8bitToLetter(array<Byte>^ outputData, String^% inputData);
 
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");
