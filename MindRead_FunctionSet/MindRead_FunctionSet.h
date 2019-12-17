@@ -51,6 +51,8 @@ namespace MindRead_FunctionSet
 		void SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
 		void SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
 
+		void SaveData_Append(String^ Data, String^ fileName);
+
 		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
 		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
 		void getbmpDataWH(int &width, int &height);

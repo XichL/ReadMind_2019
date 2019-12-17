@@ -270,6 +270,31 @@ namespace MindRead_FunctionSet
 		}
 	}
 
+	void FunctionSet::SaveData_Append(String ^ Data, String ^ fileName)
+	{
+		IO::FileStream^ fs;
+		String^ FilePath = ImageFolderPath;
+		IO::Directory::CreateDirectory(FilePath);
+		FilePath += fileName;
+
+		String^ FILE_NAME = FilePath;
+		FileStream^ fs;
+		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
+		String^ str = Environment::NewLine + "¸Ñ=" + Data;
+		try
+		{
+			if (File::Exists(FILE_NAME))
+			{
+				fs = gcnew FileStream(FILE_NAME, FileMode::Append);
+			}
+			fs->Write(asciiEncoding->GetBytes(Data), 0, asciiEncoding->GetByteCount(Data));
+		}
+		catch (System::Exception^ e)
+		{
+			logger->Debug(e);
+		}
+	}
+
 	bool FunctionSet::BGRtoY(unsigned char * BGRImage, int Width, int Height, unsigned char * YImage)
 	{
 		bool bRes = true;
@@ -344,21 +369,39 @@ namespace MindRead_FunctionSet
 	{
 		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
 
-		outputData = gcnew array<Byte>(inputData->Length);
-		int count = 0;
-		for each(char a in inputData)
+		outputData = gcnew array<Byte>(inputData->Length*8);
+		pin_ptr<Byte> ptr = &outputData[0];
+		for each(char c in inputData)
 		{
+			String^ tmp = Convert::ToString(c, 2);
+			int gapSize = 8 - tmp->Length;
+			for (int i = 0; i < 8; i++)
+			{
+				if (gapSize - i > 0)
+				{
+					*ptr++ = '0';
+				}
+				else
+				{
+					*ptr++ = tmp[i - gapSize];
+				}
+			}
+
+
 			//String^ tmpString = Convert::ToString(a, 16);
 			//std::string Tstring = String2string(tmpString);
 
 			//Byte ss = Convert::ToByte(tmpString);
 
 			//Byte ss = Convert::ToByte(a);
-			UCHAR ss = Convert::ToByte(Convert::ToString(a,16), 16);
+			//UCHAR ss = Convert::ToByte(Convert::ToString(a,8), 8);
+			
+			//String^ tt = Convert::ToString(a, 2);
+			//UCHAR ss = (Convert::ToByte(Convert::ToString(a, 8), 8) >> 4)|(Convert::ToByte(Convert::ToString(a, 8), 8) << 4);
 			//outputData[count] = ss;
 
 
-			count++;
+			//count++;
 		}
 		//throw gcnew System::NotImplementedException();
 	}
