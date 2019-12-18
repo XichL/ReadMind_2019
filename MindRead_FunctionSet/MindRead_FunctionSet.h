@@ -58,12 +58,14 @@ namespace MindRead_FunctionSet
 		void getbmpDataWH(int &width, int &height);
 		bool BGRtoY(unsigned char *BGRImage, int Width, int Height, unsigned char *YImage);
 
+		void TransTo8bitASCII(String^ inputData, String^% outputData);
+		void ASCII8bitToLetter(String^ inputData, String^% outputData);
 
-		void TransTo8bitASCII(String^ inputData ,array<Byte>^% outputData);
-		void ASCII8bitToLetter(array<Byte>^ outputData, String^% inputData);
+		void String2Byte(String^ inputData ,array<Byte>^% outputData);
 
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");
+		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
 		int Width, Height;
 		String^ FileName;
 		unsigned char *pFrameBuffer;

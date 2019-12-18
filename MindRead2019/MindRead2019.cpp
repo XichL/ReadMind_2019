@@ -15,8 +15,12 @@ int main(array<System::String ^> ^args)
 	String^ TestString = "1Tu6k4mLULyGMOOA";
 
 	array<Byte>^ out;
-	MRFun->TransTo8bitASCII(TestString, out);
-	MRFun->SaveData(out, out->Length, 1, 1, "Test.txt");
+	String^ dst;
+	String^ backString;
+	MRFun->TransTo8bitASCII(TestString, dst);
+	MRFun->ASCII8bitToLetter(dst, backString);
+	//MRFun->TransTo8bitASCII(TestString, out);
+	//MRFun->SaveData(out, out->Length, 1, 1, "Test.txt");
 
 
 	return 0;

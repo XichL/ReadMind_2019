@@ -278,8 +278,6 @@ namespace MindRead_FunctionSet
 		FilePath += fileName;
 
 		String^ FILE_NAME = FilePath;
-		FileStream^ fs;
-		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
 		String^ str = Environment::NewLine + "¸Ñ=" + Data;
 		try
 		{
@@ -365,10 +363,67 @@ namespace MindRead_FunctionSet
 			Dst[i] = Src[i * 2 + 1];
 		}
 	}
-	void FunctionSet::TransTo8bitASCII(String^ inputData, array<Byte>^% outputData)
-	{
-		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
 
+	void FunctionSet::TransTo8bitASCII(String ^ inputData, String^% outputData)
+	{
+		for each(UCHAR c in inputData)
+		{
+			String^ tmp = Convert::ToString(c, 2);
+
+			int gapSize = 8 - tmp->Length;
+			for (int i = 0; i < gapSize; i++)
+			{
+				outputData += "0";
+			}
+			outputData += tmp;
+		}
+
+	}
+
+	void FunctionSet::ASCII8bitToLetter(String^ inputData, String^% outputData)
+	{
+		array<int>^ str8bit = gcnew array<int>(8);
+		pin_ptr<int> ptrInt = &str8bit[0];
+
+		int bitCount = 0;
+		for each(UCHAR c in inputData)
+		{
+			if (c != '0'&&c != '1')
+			{
+				continue;
+			}
+			else
+			{
+				*ptrInt++ = (c == '0' ? 0 : 1);
+				bitCount++;
+			}
+
+			if (bitCount==8)
+			{
+				int sum = 0;
+				sum = ((str8bit[0] * 8) +
+					(str8bit[1] * 4) +
+					(str8bit[2] * 2) +
+					(str8bit[3] * 1)) * 16;
+
+				sum += (str8bit[4]) * 8 +
+					(str8bit[5] * 4) +
+					(str8bit[6] * 2) +
+					(str8bit[7] * 1);
+
+				std::string strTmp;
+				strTmp.push_back((char)sum);
+				String^ ascii = gcnew String(strTmp.c_str());
+				
+				outputData += ascii;
+				ptrInt = &str8bit[0];
+				bitCount = 0;
+			}
+		}
+	}
+
+	void FunctionSet::String2Byte(String^ inputData, array<Byte>^% outputData)
+	{
 		outputData = gcnew array<Byte>(inputData->Length*8);
 		pin_ptr<Byte> ptr = &outputData[0];
 		for each(char c in inputData)
@@ -387,7 +442,6 @@ namespace MindRead_FunctionSet
 				}
 			}
 
-
 			//String^ tmpString = Convert::ToString(a, 16);
 			//std::string Tstring = String2string(tmpString);
 
@@ -403,10 +457,6 @@ namespace MindRead_FunctionSet
 
 			//count++;
 		}
-		//throw gcnew System::NotImplementedException();
-	}
-	void FunctionSet::ASCII8bitToLetter(array<Byte>^ outputData, String^% inputData)
-	{
 		//throw gcnew System::NotImplementedException();
 	}
 }
