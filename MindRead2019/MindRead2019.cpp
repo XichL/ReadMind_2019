@@ -11,8 +11,9 @@ int main(array<System::String ^> ^args)
 {
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
-#if 1
-	//String^ TestString = "1Tu6k4mLULyGMOOA";
+#pragma region 測試ASCII
+#if 0 //測試ASCII
+//String^ TestString = "1Tu6k4mLULyGMOOA";
 	String^ TestString = "PZxOYX6P7tpCNE12";
 
 
@@ -61,24 +62,47 @@ int main(array<System::String ^> ^args)
 	//MRFun->TransTo8bitASCII(TestString, out);
 	//MRFun->SaveData(out, out->Length, 1, 1, "Test.txt");
 
-
-	return 0;
 #endif	
+#pragma endregion
 
+#pragma region 測試圖片轉換
+#if 1
 	array<Byte>^ SrcByteBuffer;
 	MRFun->LoadBMP(SrcByteBuffer);
 
 	int nWidth, nHeight;
 	MRFun->getbmpDataWH(nWidth, nHeight);
 
+	//彩圖轉灰階並拓展成16bit長度格式
 	array<Byte>^ Bit16Buffer = gcnew array<Byte>(nWidth*nHeight * 2);
 	MRFun->mosaic(SrcByteBuffer, nWidth, nHeight, 3, Bit16Buffer);
-
 	MRFun->SaveData(Bit16Buffer, nWidth, nHeight, 2, "To16Buffer.raw");
 
+	//高低位元轉換
+	array<Byte>^ HVConvert = gcnew array<Byte>(nWidth*nHeight * 2);
+	MRFun->HLConverter(Bit16Buffer, 2, HVConvert);
+	MRFun->SaveData(Bit16Buffer, nWidth, nHeight, 2, "HLConvert.raw");
+
+	array<Byte>^ HVConvert_back = gcnew array<Byte>(nWidth*nHeight * 2);
+	MRFun->HLConverter(HVConvert, 2, HVConvert_back);
+	MRFun->SaveData(HVConvert_back, nWidth, nHeight, 2, "HLConvert_Back.raw");
+
+	//測試若沒有高低位退回8bit結果
+	array<Byte>^ outputDemosaic_NoHLBack = gcnew array<Byte>(nWidth*nHeight);
+	MRFun->demosaic(HVConvert, nWidth, nHeight, 2, outputDemosaic_NoHLBack);
+	MRFun->SaveData(outputDemosaic_NoHLBack, nWidth, nHeight, 1, "Demosaic_NoHLBack.raw");
+
+	array<Byte>^ outputDemosaic_HLBack = gcnew array<Byte>(nWidth*nHeight);
+	MRFun->demosaic(HVConvert_back, nWidth, nHeight, 2, outputDemosaic_HLBack);
+	MRFun->SaveData(outputDemosaic_HLBack, nWidth, nHeight, 1, "Demosaic_HLBack.raw");
+
+	//將16bit格式退回8bit
 	array<Byte>^ outputDemosaic = gcnew array<Byte>(nWidth*nHeight);
 	MRFun->demosaic(Bit16Buffer, nWidth, nHeight, 2, outputDemosaic);
 	MRFun->SaveData(outputDemosaic, nWidth, nHeight, 1, "Demosaic.raw");
+#endif
+#pragma endregion
+
 
 	//----------------------------------------------------
 	return 0;

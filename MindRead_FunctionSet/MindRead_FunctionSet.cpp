@@ -327,6 +327,25 @@ namespace MindRead_FunctionSet
 		return bRes;
 	}
 
+	void FunctionSet::HLConverter(array<Byte>^ Src, int byteNum, array<Byte>^% Dst)
+	{
+		pin_ptr<Byte> ptrSrc = &Src[0];
+		pin_ptr<Byte> ptrDst = &Dst[0];
+
+		if (byteNum == 2)
+		{
+			for (int i = 0; i < Src->Length / 2; i++)
+			{
+				*ptrDst++ = ptrSrc[i * 2 + 1];
+				*ptrDst++ = ptrSrc[i * 2];
+			}
+		}
+		else //byteNum == 1
+		{
+
+		}
+	}
+
 	void FunctionSet::mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst)
 	{
 		array<Byte>^ YBuffer = gcnew array<Byte>(width*height);
@@ -352,7 +371,7 @@ namespace MindRead_FunctionSet
 			}
 		}
 
-		SaveData(tmpMosaic, width, height, 1, "USHORT.raw");
+		//SaveData(tmpMosaic, width, height, 1, "USHORT.raw");
 	}
 
 	void FunctionSet::demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst)

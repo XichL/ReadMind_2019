@@ -44,7 +44,6 @@ namespace MindRead_FunctionSet
 		void LoadBMP(unsigned char *_FrameBuffer);
 		void LoadBMP(array<Byte>^% _FrameBuffer);
 
-
 		void SaveBmp(Drawing::Bitmap^ bmp, String^ path);
 
 		void SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
@@ -57,6 +56,8 @@ namespace MindRead_FunctionSet
 		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
 		void getbmpDataWH(int &width, int &height);
 		bool BGRtoY(unsigned char *BGRImage, int Width, int Height, unsigned char *YImage);
+
+		void HLConverter(array<Byte>^ Src, int byteNum, array<Byte>^% Dst);
 
 		void TransTo8bitASCII(String^ inputData, String^% outputData);
 		void ASCII8bitToLetter(String^ inputData, String^% outputData);
