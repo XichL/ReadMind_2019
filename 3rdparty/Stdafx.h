@@ -15,3 +15,10 @@
 #include <vector>
 
 #pragma comment(lib, "user32.lib")
+
+#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
+
+inline void test()
+{
+
+}
