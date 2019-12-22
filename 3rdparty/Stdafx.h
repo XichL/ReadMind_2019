@@ -18,7 +18,6 @@
 
 #define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
 
-inline void test()
+inline bool checkFileCount()
 {
-
 }

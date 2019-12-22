@@ -190,9 +190,16 @@ namespace MindRead_FunctionSet
 		height = this->Height;
 	}
 
-	void FunctionSet::SaveBmp(Drawing::Bitmap ^ bmp, String ^ path)
+	void FunctionSet::SaveBmp(Drawing::Bitmap ^ bmp, bool cover, String ^ fileName)
 	{
-		bmp->Save(CheckFileExist(0, path), Drawing::Imaging::ImageFormat::Bmp);
+		String^ FilePath = ImageFolderPath;
+		IO::Directory::CreateDirectory(FilePath);
+
+		FilePath += fileName + ".bmp";
+		if (!cover)
+			FilePath = CheckFileExist(0, FilePath);
+
+		bmp->Save(FilePath, Drawing::Imaging::ImageFormat::Bmp);
 	}
 
 	void FunctionSet::SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String ^ fileName)
@@ -281,16 +288,61 @@ namespace MindRead_FunctionSet
 		String^ str = Environment::NewLine + "¸Ñ=" + Data;
 		try
 		{
-			if (File::Exists(FILE_NAME))
+			if (!File::Exists(FILE_NAME))
+			{
+				fs = gcnew FileStream(FILE_NAME, FileMode::CreateNew);
+			}
+			else
 			{
 				fs = gcnew FileStream(FILE_NAME, FileMode::Append);
 			}
-			fs->Write(asciiEncoding->GetBytes(Data), 0, asciiEncoding->GetByteCount(Data));
+			fs->Write(asciiEncoding->GetBytes(str), 0, asciiEncoding->GetByteCount(str));
 		}
 		catch (System::Exception^ e)
 		{
 			logger->Debug(e);
 		}
+	}
+
+	void FunctionSet::SaveStringData_cover(String ^ strMessage, String ^ fileName)
+	{
+		IO::FileStream^ fs;
+		String^ FilePath = ImageFolderPath;
+		IO::Directory::CreateDirectory(FilePath);
+		FilePath += fileName;
+
+		String^ FILE_NAME = FilePath;
+		try
+		{
+			fs = gcnew FileStream(FILE_NAME, FileMode::Create);
+			fs->Close();
+
+			IO::StreamWriter^ TW = gcnew IO::StreamWriter(FILE_NAME, false, System::Text::Encoding::Default);
+			TW->Write(strMessage);
+			TW->Close();
+		}
+		catch (System::Exception^ e)
+		{
+			logger->Debug(e);
+		}
+
+
+		//try
+		//{
+		//	fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
+
+		//	IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
+		//	for (int i = 0; i < nWidth*nHeight; i++)
+		//	{
+		//		TW->Write(Data[i]);
+		//	}
+		//	fs->Close();
+		//	TW->Close();
+		//}
+		//catch (System::Exception^ e)
+		//{
+		//	logger->Debug(e);
+		//}
 	}
 
 	bool FunctionSet::BGRtoY(unsigned char * BGRImage, int Width, int Height, unsigned char * YImage)
@@ -325,6 +377,44 @@ namespace MindRead_FunctionSet
 		}
 		//-------------------------------------------------
 		return bRes;
+	}
+
+	void FunctionSet::Raw2Bmp(array<Byte>^ Src, Drawing::Bitmap ^ Bmp)
+	{
+		// Lock the bitmap's bits.  
+		Drawing::Rectangle rect = Drawing::Rectangle(0, 0, Bmp->Width, Bmp->Height);
+		Drawing::Imaging::BitmapData^ bmpData = Bmp->LockBits(rect, Drawing::Imaging::ImageLockMode::ReadWrite, Drawing::Imaging::PixelFormat::Format8bppIndexed);
+
+		// Get the address of the first line.
+		pin_ptr<byte> ptr = &Src[0];
+		UCHAR *Source = ptr;
+		UCHAR *Target = (UCHAR*)(void*)bmpData->Scan0;
+
+		// Copy the value.  
+		int offset = bmpData->Stride - Bmp->Width;
+		if (offset == 0)
+		{
+			memcpy(Target, Source, Bmp->Width*Bmp->Height);
+		}
+		else
+		{
+			for (int y = 0; y < Bmp->Height; y++)
+			{
+				memcpy(Target, Source, Bmp->Width);
+				Target += Bmp->Width + offset;
+				Source += Bmp->Width;
+			}
+		}
+
+		// Unlock the bits.
+		Bmp->UnlockBits(bmpData);
+
+		Drawing::Imaging::ColorPalette^ pal = Bmp->Palette;
+		for (int i = 0; i < 256; i++)
+		{
+			pal->Entries[i] = Drawing::Color::FromArgb(i, i, i);
+		}
+		Bmp->Palette = pal;
 	}
 
 	void FunctionSet::HLConverter(array<Byte>^ Src, int byteNum, array<Byte>^% Dst)

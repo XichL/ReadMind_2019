@@ -11,6 +11,28 @@ int main(array<System::String ^> ^args)
 {
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
+
+
+#pragma region 測試讀資源內容
+	System::Resources::ResXResourceReader^ reader = gcnew System::Resources::ResXResourceReader(
+		"C:\\Users\\may31\\Documents\\GitHub\\ReadMind_2019\\MindRead2019\\Resource.resx");
+	for each(System::Collections::DictionaryEntry entry in reader)
+	{
+		Console::WriteLine("  {0}={1}", entry.Key, entry.Value);
+	}
+	system("PAUSE");
+
+#pragma endregion
+
+
+#pragma region 測試存中文
+#if 0 //測試存中文
+	String^ TestString = "中文字";
+
+	MRFun->SaveStringData_cover(TestString, "test.txt");
+#endif
+#pragma endregion
+
 #pragma region 測試ASCII
 #if 0 //測試ASCII
 //String^ TestString = "1Tu6k4mLULyGMOOA";
@@ -66,7 +88,7 @@ int main(array<System::String ^> ^args)
 #pragma endregion
 
 #pragma region 測試圖片轉換
-#if 1
+#if 0
 	array<Byte>^ SrcByteBuffer;
 	MRFun->LoadBMP(SrcByteBuffer);
 
@@ -81,7 +103,7 @@ int main(array<System::String ^> ^args)
 	//高低位元轉換
 	array<Byte>^ HVConvert = gcnew array<Byte>(nWidth*nHeight * 2);
 	MRFun->HLConverter(Bit16Buffer, 2, HVConvert);
-	MRFun->SaveData(Bit16Buffer, nWidth, nHeight, 2, "HLConvert.raw");
+	MRFun->SaveData(HVConvert, nWidth, nHeight, 2, "HLConvert.raw");
 
 	array<Byte>^ HVConvert_back = gcnew array<Byte>(nWidth*nHeight * 2);
 	MRFun->HLConverter(HVConvert, 2, HVConvert_back);
@@ -92,6 +114,7 @@ int main(array<System::String ^> ^args)
 	MRFun->demosaic(HVConvert, nWidth, nHeight, 2, outputDemosaic_NoHLBack);
 	MRFun->SaveData(outputDemosaic_NoHLBack, nWidth, nHeight, 1, "Demosaic_NoHLBack.raw");
 
+	//高低位元後
 	array<Byte>^ outputDemosaic_HLBack = gcnew array<Byte>(nWidth*nHeight);
 	MRFun->demosaic(HVConvert_back, nWidth, nHeight, 2, outputDemosaic_HLBack);
 	MRFun->SaveData(outputDemosaic_HLBack, nWidth, nHeight, 1, "Demosaic_HLBack.raw");
@@ -100,10 +123,12 @@ int main(array<System::String ^> ^args)
 	array<Byte>^ outputDemosaic = gcnew array<Byte>(nWidth*nHeight);
 	MRFun->demosaic(Bit16Buffer, nWidth, nHeight, 2, outputDemosaic);
 	MRFun->SaveData(outputDemosaic, nWidth, nHeight, 1, "Demosaic.raw");
+
+	Drawing::Bitmap^ outBmp = gcnew Drawing::Bitmap(nWidth, nHeight, Drawing::Imaging::PixelFormat::Format8bppIndexed);
+	MRFun->Raw2Bmp(outputDemosaic, outBmp);
+	MRFun->SaveBmp(outBmp, false, "outTest");
 #endif
 #pragma endregion
-
-
 	//----------------------------------------------------
 	return 0;
 }

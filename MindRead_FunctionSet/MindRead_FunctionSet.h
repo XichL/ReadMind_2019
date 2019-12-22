@@ -36,15 +36,18 @@ namespace MindRead_FunctionSet
 		FunctionSet();
 		~FunctionSet();
 
+		//寫Log用
 		bool NLogMsg(String^ Message);
 		bool NLogMsg(String^ FuncTag, String^ Message);
 
+		//讀檔專用
 		void DataLoad(String^ loadPath, array<Byte>^ loadData);
 
 		void LoadBMP(unsigned char *_FrameBuffer);
 		void LoadBMP(array<Byte>^% _FrameBuffer);
 
-		void SaveBmp(Drawing::Bitmap^ bmp, String^ path);
+		//存檔專用
+		void SaveBmp(Drawing::Bitmap^ bmp, bool cover, String^ fileName);
 
 		void SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
 		void SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
@@ -52,10 +55,15 @@ namespace MindRead_FunctionSet
 
 		void SaveData_Append(String^ Data, String^ fileName);
 
+		void SaveStringData_cover(String^ strMessage ,String^ fileName);
+
+		//各種轉換工具
 		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
 		void demosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
 		void getbmpDataWH(int &width, int &height);
 		bool BGRtoY(unsigned char *BGRImage, int Width, int Height, unsigned char *YImage);
+
+		void Raw2Bmp(array<Byte>^ Src, Drawing::Bitmap^ bmp);
 
 		void HLConverter(array<Byte>^ Src, int byteNum, array<Byte>^% Dst);
 

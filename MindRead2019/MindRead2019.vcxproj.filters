@@ -46,4 +46,12 @@
       <Filter>資源檔</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Filter>資源檔</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bin\x64\Debug\HLConvert.raw" />
+  </ItemGroup>
 </Project>

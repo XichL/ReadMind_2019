@@ -43,4 +43,13 @@
       <Filter>資源檔</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\3rdparty\HighLowConverterResource\raw檔是什麼.txt" />
+    <Text Include="..\3rdparty\HighLowConverterResource\WhatIsRaw.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bin\x64\Debug\HLConvert.raw">
+      <Filter>資源檔</Filter>
+    </None>
+  </ItemGroup>
 </Project>
