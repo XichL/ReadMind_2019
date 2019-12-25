@@ -36,6 +36,8 @@ namespace MindRead_FunctionSet
 		FunctionSet();
 		~FunctionSet();
 
+
+
 		//¼gLog¥Î
 		bool NLogMsg(String^ Message);
 		bool NLogMsg(String^ FuncTag, String^ Message);
@@ -72,6 +74,9 @@ namespace MindRead_FunctionSet
 
 		void String2Byte(String^ inputData ,array<Byte>^% outputData);
 
+		//´ú¸Õ
+		void getData(array<byte>^% s);
+
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");
 		System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
@@ -79,5 +84,8 @@ namespace MindRead_FunctionSet
 		String^ FileName;
 		unsigned char *pFrameBuffer;
 		ImageData^ bmpData;
+
+		System::Resources::ResourceManager^ mng = gcnew System::Resources::ResourceManager("MindRead_FunctionSet.Resource",
+			this->GetType()->Assembly);
 	};
 }

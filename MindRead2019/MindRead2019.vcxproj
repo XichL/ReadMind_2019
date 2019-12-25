@@ -196,7 +196,7 @@
     <EmbeddedResource Include="Resource.resx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bin\x64\Debug\HLConvert.raw" />
+    <None Include="..\3rdparty\ResxSource\HLConvert.raw" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

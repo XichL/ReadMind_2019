@@ -14,14 +14,25 @@ int main(array<System::String ^> ^args)
 
 
 #pragma region 測試讀資源內容
+#if 1 //測試讀資源內容
+	
+	array<byte>^ testByte;
+	MRFun->getData(testByte);
+
 	System::Resources::ResXResourceReader^ reader = gcnew System::Resources::ResXResourceReader(
-		"C:\\Users\\may31\\Documents\\GitHub\\ReadMind_2019\\MindRead2019\\Resource.resx");
+		"Resource.resx");
+		//"C:\\Users\\may31\\Documents\\GitHub\\ReadMind_2019\\MindRead2019\\Resource.resx");
 	for each(System::Collections::DictionaryEntry entry in reader)
 	{
-		Console::WriteLine("  {0}={1}", entry.Key, entry.Value);
+		array<byte>^ a = (array<byte>^)entry.Value;
+		//Console::WriteLine("  {0}={1}", entry.Key, entry.Value);
+		for (int i = 0; i < 100; i++)
+		{
+			Console::Write("{0}", a[i]);
+		}
 	}
 	system("PAUSE");
-
+#endif
 #pragma endregion
 
 

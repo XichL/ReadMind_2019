@@ -568,4 +568,8 @@ namespace MindRead_FunctionSet
 		}
 		//throw gcnew System::NotImplementedException();
 	}
+	void FunctionSet::getData(array<byte>^% s)
+	{
+		s = (array<byte>^)this->mng->GetObject("HLConvert");
+	}
 }
