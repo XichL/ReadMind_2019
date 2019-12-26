@@ -6,7 +6,8 @@
 #define String2string(a) (const char*)(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(a)).ToPointer();
 
 #define DebguSBS true
-#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
+//#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
+#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\")
 #define NLOG_DLLTAG	"[MindReadFunctionSet]"
 
 namespace MindRead_FunctionSet
@@ -30,13 +31,19 @@ namespace MindRead_FunctionSet
 		array<Byte>^ imgData;
 	};
 
+	public enum class FILETYPE
+	{
+		FILETYPE_TXT,
+		FILETYPE_RAW,
+		FILETYPE_BMP,
+		FILETYPE_OTHER
+	};
+
 	public ref class FunctionSet
 	{
 	public:
 		FunctionSet();
 		~FunctionSet();
-
-
 
 		//寫Log用
 		bool NLogMsg(String^ Message);
@@ -57,7 +64,7 @@ namespace MindRead_FunctionSet
 
 		void SaveData_Append(String^ Data, String^ fileName);
 
-		void SaveStringData_cover(String^ strMessage ,String^ fileName);
+		void SaveStringData_Encoding(String^ strMessage ,String^ fileName);
 
 		//各種轉換工具
 		void mosaic(array<Byte>^ Src, int width, int height, int channel, array<Byte>^% Dst);
@@ -74,8 +81,8 @@ namespace MindRead_FunctionSet
 
 		void String2Byte(String^ inputData ,array<Byte>^% outputData);
 
-		//測試
-		void getData(array<byte>^% s);
+		//取得資源檔內容
+		void GetSourceFile(String^ FileName, FILETYPE^ type, String^ saveName);
 
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");
@@ -85,7 +92,7 @@ namespace MindRead_FunctionSet
 		unsigned char *pFrameBuffer;
 		ImageData^ bmpData;
 
-		System::Resources::ResourceManager^ mng = gcnew System::Resources::ResourceManager("MindRead_FunctionSet.Resource",
+		System::Resources::ResourceManager^ mng = gcnew System::Resources::ResourceManager("MindReadFunctionSet.Resource",
 			this->GetType()->Assembly);
 	};
 }

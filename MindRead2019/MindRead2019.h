@@ -9,6 +9,6 @@ namespace MindRead2019Test
 	private:
 
 	public:
-		FunctionSet^ MRFun = gcnew FunctionSet();
+		//FunctionSet^ MRFun = gcnew FunctionSet();
 	};
 }

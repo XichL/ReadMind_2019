@@ -15,10 +15,15 @@ int main(array<System::String ^> ^args)
 
 #pragma region 測試讀資源內容
 #if 1 //測試讀資源內容
-	
-	array<byte>^ testByte;
-	MRFun->getData(testByte);
+	MRFun->GetSourceFile("TraesureImage", FILETYPE::FILETYPE_BMP, "TraesureImage");
+	return 2;
 
+	//從dll取資源中的檔案並存檔
+	MRFun->GetSourceFile("EasyDecryption_ASCII的用途", FILETYPE::FILETYPE_TXT,
+		"EasyDecryption_ASCII的用途.txt");
+	return 1;
+
+	//從.exe資源內容resx讀取
 	System::Resources::ResXResourceReader^ reader = gcnew System::Resources::ResXResourceReader(
 		"Resource.resx");
 		//"C:\\Users\\may31\\Documents\\GitHub\\ReadMind_2019\\MindRead2019\\Resource.resx");
@@ -47,15 +52,17 @@ int main(array<System::String ^> ^args)
 #pragma region 測試ASCII
 #if 0 //測試ASCII
 //String^ TestString = "1Tu6k4mLULyGMOOA";
-	String^ TestString = "PZxOYX6P7tpCNE12";
-
+	//String^ TestString = "PZxOYX6P7tpCNE12";
+	String^ TestString = "STOCKING";
 
 	array<Byte>^ out;
 	String^ dst;
 	String^ backString;
+	//轉成8bit二進位
 	MRFun->TransTo8bitASCII(TestString, dst);
 
 	String^ newStr;
+	//高2低2互換
 	for (int i = 0; i < dst->Length / 4; i++)
 	{
 		std::string c1, c2, c3, c4;
@@ -72,8 +79,9 @@ int main(array<System::String ^> ^args)
 		newStr += s1 + s2 + s3 + s4;
 	}
 
-	//back
+	//back，轉回
 	String^ newStr2;
+	//高2低2互換
 	for (int i = 0; i < newStr->Length / 4; i++)
 	{
 		std::string c1, c2, c3, c4;
@@ -89,8 +97,10 @@ int main(array<System::String ^> ^args)
 
 		newStr2 += s1 + s2 + s3 + s4;
 	}
+	//將8bit轉為文字
 	MRFun->ASCII8bitToLetter(newStr2, backString);
 
+	//測試若沒有高2低2互換的話
 	MRFun->ASCII8bitToLetter(dst, backString);
 	//MRFun->TransTo8bitASCII(TestString, out);
 	//MRFun->SaveData(out, out->Length, 1, 1, "Test.txt");

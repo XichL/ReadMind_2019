@@ -304,7 +304,7 @@ namespace MindRead_FunctionSet
 		}
 	}
 
-	void FunctionSet::SaveStringData_cover(String ^ strMessage, String ^ fileName)
+	void FunctionSet::SaveStringData_Encoding(String ^ strMessage, String ^ fileName)
 	{
 		IO::FileStream^ fs;
 		String^ FilePath = ImageFolderPath;
@@ -568,8 +568,24 @@ namespace MindRead_FunctionSet
 		}
 		//throw gcnew System::NotImplementedException();
 	}
-	void FunctionSet::getData(array<byte>^% s)
+	void FunctionSet::GetSourceFile(String ^ FileName, FILETYPE^ type, String ^ saveName)
 	{
-		s = (array<byte>^)this->mng->GetObject("HLConvert");
+		if (type->Equals(FILETYPE::FILETYPE_TXT))
+		{
+			String^ message = (String^)this->mng->GetObject(FileName);
+			SaveStringData_Encoding(message, saveName);
+		}
+		else if (type->Equals(FILETYPE::FILETYPE_RAW))
+		{
+			array<byte>^ rawByte = (array<byte>^)this->mng->GetObject(FileName);
+			SaveData(rawByte, rawByte->Length, 1, 1, saveName);
+		}
+		else if (type->Equals(FILETYPE::FILETYPE_BMP))
+		{
+			Bitmap^ img = (Bitmap^)this->mng->GetObject(FileName);
+			SaveBmp(img, 1, saveName);
+		}
+		(array<byte>^)this->mng->GetObject("HLConvert");
 	}
+
 }

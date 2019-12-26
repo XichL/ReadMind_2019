@@ -164,6 +164,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\3rdparty\Resource\TraesureImage.bmp" />
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -178,10 +179,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource.resx" />
+    <EmbeddedResource Include="..\3rdparty\Resource.resx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\3rdparty\ResxSource\HLConvert.raw" />
+    <Text Include="..\3rdparty\Resource\EasyDecryption_ASCII的用途.txt" />
+    <Text Include="..\3rdparty\Resource\HighLow轉換的用意.txt" />
+    <Text Include="..\3rdparty\Resource\Key.txt" />
+    <Text Include="..\3rdparty\Resource\KEY的解讀.txt" />
+    <Text Include="..\3rdparty\Resource\raw檔是什麼.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
