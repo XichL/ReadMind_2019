@@ -51,6 +51,7 @@ namespace MindRead_FunctionSet
 
 		//ÅªÀÉ±M¥Î
 		void DataLoad(String^ loadPath, array<Byte>^ loadData);
+		void DataLoad_TXT(String^ loadPath, array<Byte>^% loadData);
 
 		void LoadBMP(unsigned char *_FrameBuffer);
 		void LoadBMP(array<Byte>^% _FrameBuffer);

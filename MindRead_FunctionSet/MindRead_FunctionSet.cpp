@@ -71,6 +71,17 @@ namespace MindRead_FunctionSet
 		//pin_ptr<double> dst_ptr = &raw12->Image[0];
 	}
 
+	void FunctionSet::DataLoad_TXT(String ^ loadPath, array<Byte>^% loadData)
+	{
+		DateTime dtSFRStartTime = DateTime::Now;
+
+		IO::FileStream^ fs = gcnew IO::FileStream(loadPath, IO::FileMode::Open);
+
+		NLogMsg("TXT UCHAR Load");
+		loadData = gcnew array <Byte>(fs->Length);
+		fs->Read(loadData, 0, fs->Length);
+	}
+
 	void FunctionSet::LoadBMP(unsigned char *_FrameBuffer)
 	{
 

@@ -13,8 +13,32 @@ int main(array<System::String ^> ^args)
 	//----------------------------------------------------
 
 
+	array<UCHAR>^ testLoadUchar;
+	MRFun->DataLoad_TXT("C://Users//may31//Documents//GitHub//ReadMind_2019//3rdparty//Resource//這是一張圖片(第一1第五0).txt", testLoadUchar);
+	bool checkRight = true;
+	for (int i = 0; i < testLoadUchar->Length; i += 4)
+	{
+		if ((i / 4) % 2 == 0)
+		{
+			if (testLoadUchar[i] != '1')
+			{
+				checkRight = false;
+				break;
+			}
+		}
+		if ((i / 4) % 2 == 1)
+		{
+			if (testLoadUchar[i] != '0')
+			{
+				checkRight = false;
+				break;
+			}
+		}
+	}
+	Diagnostics::Trace::WriteLine(checkRight ? "Pass" : "Fail");
+
 #pragma region 測試讀資源內容
-#if 1 //測試讀資源內容
+#if 0 //測試讀資源內容
 	MRFun->GetSourceFile("TraesureImage", FILETYPE::FILETYPE_BMP, "TraesureImage");
 	return 2;
 

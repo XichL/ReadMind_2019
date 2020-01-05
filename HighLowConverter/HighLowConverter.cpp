@@ -3,6 +3,7 @@
 using namespace System;
 using namespace MindRead_FunctionSet;
 
+[STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
 	AppDomain::CurrentDomain->AppendPrivatePath("Miscellaneous");
@@ -32,7 +33,7 @@ int main(array<System::String ^> ^args)
 
 				strMessage += "不一樣的手續去馬賽克的結果不盡相同，但為了取得讓一般人也可以觀看的圖片，去馬賽克的動作是必須的。";
 
-				MRFun->SaveStringData_cover(strMessage, "raw檔是什麼.txt");
+				//MRFun->SaveStringData_cover(strMessage, "raw檔是什麼.txt");
 
 				break;
 			}
