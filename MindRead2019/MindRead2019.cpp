@@ -13,6 +13,8 @@ int main(array<System::String ^> ^args)
 	//----------------------------------------------------
 
 
+#pragma region 測試文字內容
+#if 0
 	array<UCHAR>^ testLoadUchar;
 	MRFun->DataLoad_TXT("C://Users//may31//Documents//GitHub//ReadMind_2019//3rdparty//Resource//這是一張圖片(第一1第五0).txt", testLoadUchar);
 	bool checkRight = true;
@@ -36,6 +38,8 @@ int main(array<System::String ^> ^args)
 		}
 	}
 	Diagnostics::Trace::WriteLine(checkRight ? "Pass" : "Fail");
+#endif
+#pragma endregion
 
 #pragma region 測試讀資源內容
 #if 0 //測試讀資源內容

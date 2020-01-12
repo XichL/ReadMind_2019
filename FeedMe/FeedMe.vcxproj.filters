@@ -21,11 +21,9 @@
     <ClInclude Include="Resource.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="app.rc">
-      <Filter>資源檔</Filter>
-    </ResourceCompile>
+    <ClInclude Include="resource1.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedMe.cpp">
@@ -39,8 +37,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="app.ico">
+    <ResourceCompile Include="FeedMe.rc">
       <Filter>資源檔</Filter>
-    </Image>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
