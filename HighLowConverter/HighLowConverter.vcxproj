@@ -198,6 +198,7 @@ copy "$(OutDir)..\MindRead_FunctionSet\NLog.dll" "$(OutDir)Miscellaneous\"</Comm
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>

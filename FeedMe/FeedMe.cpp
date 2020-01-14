@@ -11,24 +11,48 @@ int main(array<System::String ^> ^args)
 	{
 		Console::WriteLine("餵太多囉~");
 		system("PAUSE");
+		//Windows::Forms::MessageBox::Show("餵太多囉~",
+		//	"",
+		//	MessageBoxButtons::OK,
+		//	MessageBoxIcon::Stop
+		//);
+
 		return 0;
 	}
-
-	Windows::Forms::MessageBox::Show("餵太多囉~",
-		"",
-		MessageBoxButtons::OK,
-		MessageBoxIcon::Stop
-	);
 
 	for (int i = 0; i < args->Length; i++)
 	{
 		IO::FileStream^ fs = gcnew IO::FileStream(args[i], IO::FileMode::Open);
 		array<String^>^ FileName = args[i]->Split('\\');
-		FileName = FileName[FileName->Length - 1]->Split('.');
-		if (FileName[1]->ToUpper() != "RAW") //檢查副檔名是否為raw圖
+
+		//若餵ReadMe
+		if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 		{
-			Console::WriteLine(FileName[0] + " is not raw image.");
-			continue;
+			Windows::Forms::MessageBox::Show("謝謝你餵我。",
+				"Thank you~",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Stop
+			);
+			///釋出TreasureImage.raw
+			return;
+		}
+		else if (FileName[FileName->Length - 1]->Equals("這是一張圖片.txt"))
+		{
+			///釋出TreasureImageFinal.raw
+			return;
+		}
+		else
+		{
+			FileName = FileName[FileName->Length - 1]->Split('.');
+			if (FileName[1]->ToUpper() != "RAW") //檢查副檔名是否為raw圖
+			{
+				Console::WriteLine(FileName[0] + " is not raw image.");
+			}
+			else
+			{
+				///釋出Tr[ae]sureImage.bmp
+			}
+			return;
 		}
 	}
 }
