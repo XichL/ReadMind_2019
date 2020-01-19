@@ -33,13 +33,18 @@ int main(array<System::String ^> ^args)
 				MessageBoxButtons::OK,
 				MessageBoxIcon::Stop
 			);
+			Windows::Forms::MessageBox::Show("這是亞席大人留下來的，就送給你吧~",
+				"Gift",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::None
+			);
 			///釋出TreasureImage.raw
-			return;
+			return 0;
 		}
 		else if (FileName[FileName->Length - 1]->Equals("這是一張圖片.txt"))
 		{
 			///釋出TreasureImageFinal.raw
-			return;
+			return 0;
 		}
 		else
 		{
@@ -52,7 +57,7 @@ int main(array<System::String ^> ^args)
 			{
 				///釋出Tr[ae]sureImage.bmp
 			}
-			return;
+			return 0;
 		}
 	}
 }

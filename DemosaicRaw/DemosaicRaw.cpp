@@ -7,6 +7,9 @@ using namespace MindRead_FunctionSet;
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
+	FunctionSet^ MRFun = gcnew FunctionSet();
+	//----------------------------------------------------
+
 	if (args->Length > 1)
 	{
 		Console::WriteLine("餵太多囉~");
@@ -28,31 +31,52 @@ int main(array<System::String ^> ^args)
 		//若餵ReadMe
 		if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 		{
-			Windows::Forms::MessageBox::Show("謝謝你餵我。",
-				"Thank you~",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Stop
-			);
-			///釋出TreasureImage.raw
-			return;
-		}
-		else if (FileName[FileName->Length - 1]->Equals("這是一張圖片.txt"))
-		{
-			///釋出TreasureImageFinal.raw
+			///釋出TreasureImagePart2.raw
 			return;
 		}
 		else
 		{
 			FileName = FileName[FileName->Length - 1]->Split('.');
-			if (FileName[1]->ToUpper() != "RAW") //檢查副檔名是否為raw圖
+			if (FileName[1]->ToUpper()->Equals("RAW")) //檢查副檔名是否為raw圖
 			{
 				Console::WriteLine(FileName[0] + " is not raw image.");
 			}
 			else
 			{
-				///釋出Tr[ae]sureImage.bmp
+				try {
+					///釋出Tr[ae]sureImage.bmp
+					int nWidth, nHeight;
+					if (FileName[0]->Equals("TreasureImage"))
+					{
+						nWidth = 1920;
+						nHeight = 960;
+					}
+					else
+					{
+						Console::WriteLine("nWidth");
+						nWidth = Convert::ToInt32(Console::ReadLine());
+						Console::WriteLine("nHeight");
+						nHeight = Convert::ToInt32(Console::ReadLine());
+					}
+
+					array<Byte>^ srcData = gcnew array<Byte>(nWidth*nHeight * 2);
+					array<Byte>^ outData = gcnew array<Byte>(nWidth*nHeight * 2);
+					fs->Read(srcData, 0, nWidth*nHeight * 2);
+					fs->Close();
+
+					MRFun->demosaic(srcData, nWidth, nHeight, 1, outData);
+					MRFun->SaveData(outData, nWidth, nHeight, 2, "Test");
+				}
+				catch (...)
+				{
+					Windows::Forms::MessageBox::Show("啊哈哈掛掉惹 P:",
+						"UCCU",
+						MessageBoxButtons::OK,
+						MessageBoxIcon::Stop
+					);
+				}
 			}
-			return;
+			return 0;
 		}
 	}
 }
