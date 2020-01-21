@@ -82,6 +82,18 @@ namespace MindRead_FunctionSet
 		fs->Read(loadData, 0, fs->Length);
 	}
 
+	void FunctionSet::DataLoad_AutoSize(String ^ loadPath, array<Byte>^% loadData)
+	{
+
+		System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(loadPath);
+		int ALength = readFile->BaseStream->Length;
+		loadData = gcnew array<Byte>(ALength);
+		readFile->Close();
+
+		IO::FileStream^ fs = gcnew IO::FileStream(loadPath, IO::FileMode::Open);
+		fs->Read(loadData, 0, ALength);
+	}
+
 	void FunctionSet::LoadBMP(unsigned char *_FrameBuffer)
 	{
 

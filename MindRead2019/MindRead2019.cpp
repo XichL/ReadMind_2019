@@ -12,6 +12,35 @@ int main(array<System::String ^> ^args)
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
 
+#pragma region 測試讀檔
+#if 1
+	System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(
+		L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/ReadMind_2019/3rdparty/Resource/TraesureImage.raw");
+
+	Collections::Generic::List<Byte>^ tmpByte = gcnew Collections::Generic::List<Byte>();
+	String^ test;
+
+	int ALength = readFile->BaseStream->Length;
+	array<Byte>^ testArray = gcnew array<Byte>(ALength);
+
+	readFile->Close();
+	String^ file = L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/ReadMind_2019/3rdparty/Resource/TraesureImage.raw";
+	IO::FileStream^ fs = gcnew IO::FileStream(file, IO::FileMode::Open);
+	fs->Read(testArray, 0, ALength);
+
+	//int Count = 0;
+	//while (!readFile->EndOfStream)
+	//{
+	//	//test = readFile->ReadLine();
+	//	tmpByte->Add(readFile->Read());
+	//	Count++;
+	//}
+
+	int a = 0;
+	a = a + 1;
+#endif
+#pragma endregion
+
 
 #pragma region 測試文字內容
 #if 0
