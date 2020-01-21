@@ -44,7 +44,7 @@ int main(array<System::String ^> ^args)
 					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 					{
 						///ÄÀ¥XTreasureImagePart2.raw
-						return;
+						return 0;
 					}
 					else
 					{

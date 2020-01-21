@@ -13,7 +13,7 @@ int main(array<System::String ^> ^args)
 	//----------------------------------------------------
 
 #pragma region 測試讀檔
-#if 1
+#if 0
 	System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(
 		L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/ReadMind_2019/3rdparty/Resource/TraesureImage.raw");
 
@@ -38,6 +38,7 @@ int main(array<System::String ^> ^args)
 
 	int a = 0;
 	a = a + 1;
+	return 0;
 #endif
 #pragma endregion
 
@@ -166,7 +167,7 @@ int main(array<System::String ^> ^args)
 #pragma endregion
 
 #pragma region 測試圖片轉換
-#if 0
+#if 1
 	array<Byte>^ SrcByteBuffer;
 	MRFun->LoadBMP(SrcByteBuffer);
 
