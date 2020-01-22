@@ -18,7 +18,9 @@ int main(array<System::String ^> ^args)
 		{
 			if (args->Length == 0)
 			{
-				//Out put What is demosaic
+				///Out put What is demosaic
+				MRFun->GetSourceFile("raw檔是什麼", FILETYPE::FILETYPE_TXT,
+					"raw檔是什麼.txt");
 				break;
 			}
 			else if (args->Length > 1)
@@ -44,7 +46,9 @@ int main(array<System::String ^> ^args)
 					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 					{
 						///釋出TreasureImagePart2.raw
-						return 0;
+						MRFun->GetSourceFile("TreasureImagePart2", FILETYPE::FILETYPE_RAW,
+							"TreasureImagePart2.raw");
+						break;
 					}
 					else
 					{
@@ -59,6 +63,10 @@ int main(array<System::String ^> ^args)
 								int nWidth, nHeight;
 								if (FileName[0]->Equals("TreasureImage"))
 								{
+									Console::WriteLine("殺斃死");
+									Console::WriteLine("nWidth = 1920");
+									Console::WriteLine("nHeight = 960");
+									system("PAUSE");
 									nWidth = 1920;
 									nHeight = 960;
 								}

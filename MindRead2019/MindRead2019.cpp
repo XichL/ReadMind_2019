@@ -9,8 +9,66 @@ using namespace System;
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
+	/*Windows::Forms::Application::EnableVisualStyles();
+	Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
+	AppDomain::CurrentDomain->AppendPrivatePath("Miscellaneous");
+	String^ strPath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\Miscellaneous";
+	IO::Directory::SetCurrentDirectory(strPath);
+
+	AppDomainSetup^ setup = gcnew AppDomainSetup();
+	setup->ApplicationBase = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\";
+	setup->PrivateBinPath = "Miscellaneous";
+	AppDomain^ currentDomain = AppDomain::CreateDomain("NewDomain", nullptr, setup);
+	currentDomain->Load("MindRead_FunctionSet");*/
+
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
+
+#pragma region MyRegion
+#if 1
+	//IO::FileStream^ fs = gcnew IO::FileStream(
+	//	L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/test.xml", IO::FileMode::Open);
+	array<Byte>^ loadData = gcnew array<Byte>(20);
+	MRFun->DataLoad_AutoSize(L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/test.xml",
+		loadData);
+
+	array<Byte>^ realData = gcnew array<Byte>(16);
+	int count = 0;
+	for (int i = 0; i < loadData->Length; i++)
+	{
+		if (loadData[i] != ' ')
+		{
+			if (count >= 16)
+				break;
+			realData[count] = loadData[i];
+			count++;
+		}
+	}
+
+	array<Byte>^ encodeData = gcnew array<Byte>(16);
+	for (int i = 0; i < realData->Length; i += 4)
+	{
+		encodeData[i] = realData[i] ^ 0;
+		encodeData[i + 1] = realData[i + 1] ^ 1;
+		encodeData[i + 2] = realData[i + 2] ^ 1;
+		encodeData[i + 3] = realData[i + 3] ^ 0;
+	}
+
+	String^ encodeString;
+	String^ outString;
+	for each(Byte b in encodeData)
+	{
+		encodeString += b == '0' ? "0" : "1";
+	}
+	MRFun->ASCII8bitToLetter(encodeString, outString);
+
+	int a = 0;
+	a = 1 + 1;
+	return 0;
+	
+#endif
+#pragma endregion
+
 
 #pragma region ´ú¸ÕÅªÀÉ
 #if 0

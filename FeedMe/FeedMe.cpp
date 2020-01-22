@@ -46,6 +46,9 @@ int main(array<System::String ^> ^args)
 					MessageBoxIcon::None
 				);
 				///釋出TreasureImage.raw
+				MRFun->GetSourceFile("TreasureImage", FILETYPE::FILETYPE_RAW,
+					"TreasureImage.raw");
+
 				break;
 			}
 			else if (FileName[FileName->Length - 1]->Equals("這是一張圖片.txt"))
@@ -53,6 +56,17 @@ int main(array<System::String ^> ^args)
 				///釋出TreasureImageFinal.raw
 				MRFun->GetSourceFile("TreasureImageFinal", FILETYPE::FILETYPE_RAW,
 					"TreasureImageFinal.raw");
+				break;
+			}
+			else if (FileName[FileName->Length - 1]->Equals("Key.txt"))
+			{
+				Windows::Forms::MessageBox::Show("嗯？這是KEY嗎？記得亞席大人有留下一些和它相關的訊息呢~就送你吧。",
+					"Gift",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::None
+				);
+				MRFun->GetSourceFile("KEY的解讀", FILETYPE::FILETYPE_TXT,
+					"KEY的解讀.txt");
 				break;
 			}
 			else

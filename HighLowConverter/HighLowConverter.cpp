@@ -19,7 +19,9 @@ int main(array<System::String ^> ^args)
 		{
 			if (args->Length == 0)
 			{
-				//output what is HLConverter
+				///output what is HLConverter
+				MRFun->GetSourceFile("HighLow轉換的用意", FILETYPE::FILETYPE_TXT,
+					"HighLow轉換的用意.txt");
 				break;
 			}
 			else if (args->Length > 1)
@@ -40,7 +42,9 @@ int main(array<System::String ^> ^args)
 					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 					{
 						///釋出TreasureImagePart1.raw
-						return 0;
+						MRFun->GetSourceFile("TreasureImagePart1", FILETYPE::FILETYPE_RAW,
+							"TreasureImagePart1.raw");
+						break;
 					}
 					else
 					{
