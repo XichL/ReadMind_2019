@@ -11,6 +11,8 @@ int main(array<System::String ^> ^args)
 	String^ strPath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\Miscellaneous";
 	IO::Directory::SetCurrentDirectory(strPath);
 
+	String^ ExecutePath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath);
+
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
 	try {
@@ -83,6 +85,18 @@ int main(array<System::String ^> ^args)
 								xorKey[1] = 1;
 								xorKey[2] = 1;
 								xorKey[3] = 0;
+							}
+							else
+							{
+								Random^ rdm;
+								array<Byte>^ randomByte = gcnew array<Byte>(3);
+								rdm->NextBytes(randomByte);
+								Console::WriteLine("……");
+								system("PAUSE");
+								xorKey[0] = randomByte[0];
+								xorKey[1] = randomByte[1];
+								xorKey[2] = randomByte[2];
+								xorKey[3] = 1;
 							}
 
 							array<Byte>^ encodeData = gcnew array<Byte>(realData->Length);
@@ -165,6 +179,10 @@ int main(array<System::String ^> ^args)
 						///釋出key
 						MRFun->GetSourceFile("Key", FILETYPE::FILETYPE_TXT,
 							"Key.txt");
+
+						//讀取內容，檢查是否存在H1~3
+						//檢查H1~3中是否有Hint
+						//"Final，W ? ? ? ? xHeight"
 						break;
 					}
 					else

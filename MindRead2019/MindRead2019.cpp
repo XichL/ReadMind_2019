@@ -25,11 +25,13 @@ int main(array<System::String ^> ^args)
 	//----------------------------------------------------
 
 #pragma region MyRegion
-#if 1
+#if 0
 	//IO::FileStream^ fs = gcnew IO::FileStream(
 	//	L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/test.xml", IO::FileMode::Open);
 	array<Byte>^ loadData = gcnew array<Byte>(20);
-	MRFun->DataLoad_AutoSize(L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/test.xml",
+	//MRFun->DataLoad_AutoSize(L"C:/Users/NST/Downloads/SVN/WorkSpace/VersionControl/Controller/Xich_Collect/test.xml",
+	//	loadData);
+	MRFun->DataLoad_AutoSize(L"C:/Users/may31/Documents/GitHub/ReadMind_2019/test.xml",
 		loadData);
 
 	array<Byte>^ realData = gcnew array<Byte>(16);
@@ -170,12 +172,15 @@ int main(array<System::String ^> ^args)
 //String^ TestString = "1Tu6k4mLULyGMOOA";
 	//String^ TestString = "PZxOYX6P7tpCNE12";
 	String^ TestString = "STOCKING";
+	String^ truePart1 = "1Tu6k4mLULyGMOOA";
+	String^ trueMiddle = "h";
+	String^ truePart2 = "PZxOYX6P7tpCNE12";
 
 	array<Byte>^ out;
 	String^ dst;
 	String^ backString;
 	//轉成8bit二進位
-	MRFun->TransTo8bitASCII(TestString, dst);
+	MRFun->TransTo8bitASCII(trueMiddle, dst);
 
 	String^ newStr;
 	//高2低2互換
@@ -225,7 +230,7 @@ int main(array<System::String ^> ^args)
 #pragma endregion
 
 #pragma region 測試圖片轉換
-#if 1
+#if 0
 	array<Byte>^ SrcByteBuffer;
 	MRFun->LoadBMP(SrcByteBuffer);
 

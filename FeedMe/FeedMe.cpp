@@ -11,6 +11,8 @@ int main(array<System::String ^> ^args)
 	String^ strPath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\Miscellaneous";
 	IO::Directory::SetCurrentDirectory(strPath);
 
+	String^ ExecutePath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath);
+
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
 	do {

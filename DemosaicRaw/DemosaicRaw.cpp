@@ -11,6 +11,8 @@ int main(array<System::String ^> ^args)
 	String^ strPath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\Miscellaneous";
 	IO::Directory::SetCurrentDirectory(strPath);
 
+	String^ ExecutePath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath);
+
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
 	try {
@@ -48,6 +50,10 @@ int main(array<System::String ^> ^args)
 						///釋出TreasureImagePart2.raw
 						MRFun->GetSourceFile("TreasureImagePart2", FILETYPE::FILETYPE_RAW,
 							"TreasureImagePart2.raw");
+
+						//讀取內容，檢查是否存在H1~3
+						//檢查H1~3中是否有Hint
+						//"Part1，W1920x1080"
 						break;
 					}
 					else
