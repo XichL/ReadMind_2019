@@ -82,7 +82,7 @@ int main(array<System::String ^> ^args)
 				{
 					///ÄÀ¥XTr[ae]sureImage.bmp
 					MRFun->GetSourceFile("TraesureImage", FILETYPE::FILETYPE_BMP,
-						"TraesureImage.bmp");
+						"TraesureImage");
 					break;
 				}
 				break;

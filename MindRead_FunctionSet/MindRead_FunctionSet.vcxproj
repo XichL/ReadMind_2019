@@ -182,11 +182,17 @@
     <EmbeddedResource Include="..\3rdparty\Resource.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\3rdparty\Resource\EasyDecryption_ASCII的用途.txt" />
     <Text Include="..\3rdparty\Resource\HighLow轉換的用意.txt" />
     <Text Include="..\3rdparty\Resource\Key.txt" />
     <Text Include="..\3rdparty\Resource\KEY的解讀.txt" />
     <Text Include="..\3rdparty\Resource\raw檔是什麼.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\3rdparty\Resource\TraesureImage.raw" />
+    <None Include="..\3rdparty\Resource\TreasureImage.raw" />
+    <None Include="..\3rdparty\Resource\TreasureImage1.raw" />
+    <None Include="..\3rdparty\Resource\TreasureImage2.raw" />
+    <None Include="..\3rdparty\Resource\TreasureImageFinal.raw" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

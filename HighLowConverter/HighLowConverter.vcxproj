@@ -177,10 +177,8 @@ copy "$(OutDir)..\MindRead_FunctionSet\NLog.dll" "$(OutDir)Miscellaneous\"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="stdafx.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
@@ -191,9 +189,6 @@ copy "$(OutDir)..\MindRead_FunctionSet\NLog.dll" "$(OutDir)Miscellaneous\"</Comm
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -212,7 +207,7 @@ copy "$(OutDir)..\MindRead_FunctionSet\NLog.dll" "$(OutDir)Miscellaneous\"</Comm
     <Text Include="..\3rdparty\HighLowConverterResource\WhatIsRaw.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bin\x64\Debug\HLConvert.raw" />
+    <ResourceCompile Include="HighLowConverter.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
