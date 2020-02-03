@@ -9,20 +9,87 @@ using namespace System;
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
-	/*Windows::Forms::Application::EnableVisualStyles();
-	Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
-	AppDomain::CurrentDomain->AppendPrivatePath("Miscellaneous");
-	String^ strPath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\Miscellaneous";
-	IO::Directory::SetCurrentDirectory(strPath);
+	//System::Configuration::ConfigurationManager::AppSettings["app"];
 
-	AppDomainSetup^ setup = gcnew AppDomainSetup();
-	setup->ApplicationBase = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\";
-	setup->PrivateBinPath = "Miscellaneous";
-	AppDomain^ currentDomain = AppDomain::CreateDomain("NewDomain", nullptr, setup);
-	currentDomain->Load("MindRead_FunctionSet");*/
+	//Windows::Forms::Application::EnableVisualStyles();
+	//Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
+	//AppDomain::CurrentDomain->AppendPrivatePath("Miscellaneous");
+	//AppDomain::CurrentDomain->CreateDomain("Miscellaneous");
+	//String^ strPath = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\Miscellaneous";
+	//IO::Directory::SetCurrentDirectory(strPath);
+
+	//Reflection::Assembly::Load(strPath + "\\MindRead_FunctionSet.dll")->CreateInstance("MindRead_FunctionSet.Operation.E5003Handler", true);
+
+	//AppDomainSetup^ setup = gcnew AppDomainSetup();
+	//setup->ApplicationBase = IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\";
+	//setup->PrivateBinPath = "Miscellaneous";
+	//AppDomain^ currentDomain = AppDomain::CreateDomain("NewDomain", nullptr, setup);
+	//currentDomain->Load("MindRead_FunctionSet");
 
 	FunctionSet^ MRFun = gcnew FunctionSet();
 	//----------------------------------------------------
+
+#pragma region 修改ReadMe內容測試
+#if 0
+
+	String^ ReadMePath = EXEPath + "\\ReadMe.txt";
+
+	System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(ReadMePath);
+	int HintNum = 0;
+	bool FindHint = false;
+	while (!readFile->EndOfStream)
+	{
+		String^ LineString = readFile->ReadLine();
+		if (LineString->Contains("H" + HintNum + "."))
+		{
+			FindHint = true;
+			array<String^>^ checkString = LineString->Split('.');
+			if (checkString[1]->Equals("Part1 = W1920x1080"))
+			//if (checkString[1]->Equals("Part2 = WPart1x1200"))
+			//if (checkString[1]->Equals("Final = W????xHeight"))
+			{
+				readFile->Close();
+				break;
+			}
+			else
+			{
+				HintNum++;
+			}
+		}
+		if (FindHint&&readFile->EndOfStream)
+		{
+			readFile->Close();
+
+			String^ strNewHint = Environment::NewLine + "H" + HintNum + ".Part1 = W1920x1080";
+			//String^ strNewHint = Environment::NewLine + "H" + HintNum + ".Part2 = WPart1x1200";
+			//String^ strNewHint = Environment::NewLine + "H" + HintNum + ".Final = W????xHeight";
+			try
+			{
+				IO::FileStream^ fs;
+				System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
+				fs = gcnew IO::FileStream(ReadMePath, IO::FileMode::Append);
+				fs->Write(asciiEncoding->GetBytes(strNewHint), 0, asciiEncoding->GetByteCount(strNewHint));
+				break;
+			}
+			catch (System::Exception^ e)
+			{
+				MRFun->NLogMsg("DemosaicRaw",
+					String::Format("Modify ReadMe : {0:0}", e));
+				return 0;
+			}
+		}
+	}
+#endif
+#pragma endregion
+
+#pragma region DllPathTest
+#if 1
+	MRFun->GetSourceFile("這是一張圖片", FILETYPE::FILETYPE_TXT, "這是一張圖片");
+	Console::WriteLine("Pass~");
+	MRFun->NLogMsg("PassMsg");
+	system("PAUSE");
+#endif
+#pragma endregion
 
 #pragma region MyRegion
 #if 0
@@ -273,9 +340,4 @@ int main(array<System::String ^> ^args)
 #pragma endregion
 	//----------------------------------------------------
 	return 0;
-}
-
-namespace MindRead2019Test
-{
-
 }

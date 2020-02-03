@@ -17,6 +17,7 @@
 #pragma comment(lib, "user32.lib")
 
 #define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
+#define EXEPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath))
 
 inline bool checkFileCount()
 {

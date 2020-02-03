@@ -183,6 +183,47 @@ int main(array<System::String ^> ^args)
 						//讀取內容，檢查是否存在H1~3
 						//檢查H1~3中是否有Hint
 						//"Final，W ? ? ? ? xHeight"
+						fs->Close();
+						System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(args[i]);
+						int HintNum = 0;
+						bool FindHint = false;
+						while (!readFile->EndOfStream)
+						{
+							String^ LineString = readFile->ReadLine();
+							if (LineString->Contains("H" + HintNum + "."))
+							{
+								FindHint = true;
+								array<String^>^ checkString = LineString->Split('.');
+								if (checkString[1]->Equals("Final = WPart?xHeight"))
+								{
+									readFile->Close();
+									break;
+								}
+								else
+								{
+									HintNum++;
+								}
+							}
+							if (FindHint&&readFile->EndOfStream)
+							{
+								readFile->Close();
+
+								String^ strNewHint = Environment::NewLine + "H" + HintNum + ".Final = WPart?xHeight";
+								try
+								{
+									System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
+									fs = gcnew IO::FileStream(args[i], IO::FileMode::Append);
+									fs->Write(asciiEncoding->GetBytes(strNewHint), 0, asciiEncoding->GetByteCount(strNewHint));
+									break;
+								}
+								catch (System::Exception^ e)
+								{
+									MRFun->NLogMsg("FinalStage",
+										String::Format("Modify ReadMe : {0:0}", e));
+									return 0;
+								}
+							}
+						}
 						break;
 					}
 					else

@@ -1,4 +1,4 @@
 Hint0：拖曳
-Hint1：Part2，WPart1x1200(拖進HighLowConverter時會出現的提示)
-Hint2：Part1，W1920x1080(拖進Demosaic.exe時會出現提示)
-HintF：Final，W????xHeight(拖進ThisIsFinalStage時出現提示)
+Hint1：Part2 = WPart1x1200(拖進HighLowConverter時會出現的提示)
+Hint2：Part1 = W1920x1080(拖進Demosaic.exe時會出現提示)
+HintF：Final = W????xHeight(拖進ThisIsFinalStage時出現提示)

@@ -46,4 +46,9 @@
       <Filter>資源檔</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <Filter>資源檔</Filter>
+    </None>
+  </ItemGroup>
 </Project>

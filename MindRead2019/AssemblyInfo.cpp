@@ -6,11 +6,11 @@ using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::InteropServices;
 using namespace System::Security::Permissions;
 
-[assembly:AssemblyTitleAttribute(L"MyMindRead2019")];
+[assembly:AssemblyTitleAttribute(L"MindRead2019")];
 [assembly:AssemblyDescriptionAttribute(L"")];
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"")];
-[assembly:AssemblyProductAttribute(L"MyMindRead2019")];
+[assembly:AssemblyProductAttribute(L"MindRead2019")];
 [assembly:AssemblyCopyrightAttribute(L"Copyright (c)  2019")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
