@@ -95,11 +95,22 @@ int main(array<System::String ^> ^args)
 					}
 					else
 					{
-						try {
+						try 
+						{
 							array<Byte>^ readByte;
 
+							String^ outputName;
+							if (FileName[FileName->Length - 1]->Contains("HLOut"))
+							{
+								outputName = FileName[FileName->Length - 1]->Split('.')[0] + ".raw";
+							}
+							else
+							{
+								outputName = FileName[FileName->Length - 1]->Split('.')[0] + "HLOut.raw";
+							}
+
 							MRFun->DataLoad_AutoSize(args[i], readByte);
-							MRFun->SaveData(readByte, readByte->Length, 0, 1, "Test");
+							MRFun->SaveData(readByte, readByte->Length, 0, 1, outputName);
 						}
 						catch (...)
 						{
