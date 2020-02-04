@@ -109,8 +109,13 @@ int main(array<System::String ^> ^args)
 								outputName = FileName[FileName->Length - 1]->Split('.')[0] + "HLOut.raw";
 							}
 
+							//讀檔(自動吃長度)
 							MRFun->DataLoad_AutoSize(args[i], readByte);
-							MRFun->SaveData(readByte, readByte->Length, 0, 1, outputName);
+							//根據長度定義outputArray
+							array<Byte>^ outputHLByte = gcnew array<Byte>(readByte->Length);
+							MRFun->HLConverter(readByte, 2, outputHLByte);
+							//儲存HLConvert的結果
+							MRFun->SaveData(outputHLByte, readByte->Length, 1, 1, true, outputName);
 						}
 						catch (...)
 						{

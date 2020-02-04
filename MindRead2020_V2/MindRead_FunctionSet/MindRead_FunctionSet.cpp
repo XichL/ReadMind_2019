@@ -218,7 +218,7 @@ namespace MindRead_FunctionSet
 
 	void FunctionSet::SaveBmp(Drawing::Bitmap ^ bmp, bool cover, String ^ fileName)
 	{
-		String^ FilePath = ImageFolderPath;
+		String^ FilePath = SaveFolderPath;
 		IO::Directory::CreateDirectory(FilePath);
 
 		FilePath += fileName + ".bmp";
@@ -228,16 +228,16 @@ namespace MindRead_FunctionSet
 		bmp->Save(FilePath, Drawing::Imaging::ImageFormat::Bmp);
 	}
 
-	void FunctionSet::SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String ^ fileName)
+	void FunctionSet::SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, bool cover, String ^ fileName)
 	{
 		IO::FileStream^ fs;
-		String^ FilePath = ImageFolderPath;
+		String^ FilePath = SaveFolderPath;
 		IO::Directory::CreateDirectory(FilePath);
 		FilePath += fileName;
 
 		try
 		{
-			fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
+			fs = gcnew IO::FileStream((cover ? CheckFileExist(0, FilePath) : FilePath), IO::FileMode::CreateNew);
 
 			IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
 			for (int i = 0; i < nWidth*nHeight; i++)
@@ -253,16 +253,16 @@ namespace MindRead_FunctionSet
 		}
 	}
 
-	void FunctionSet::SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, String ^ fileName)
+	void FunctionSet::SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, bool cover, String ^ fileName)
 	{
 		IO::FileStream^ fs;
-		String^ FilePath = ImageFolderPath;
+		String^ FilePath = SaveFolderPath;
 		IO::Directory::CreateDirectory(FilePath);
 		FilePath += fileName;
 
 		try
 		{
-			fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
+			fs = gcnew IO::FileStream((cover ? CheckFileExist(0, FilePath) : FilePath), IO::FileMode::CreateNew);
 
 			IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
 			for (int i = 0; i < nWidth*nHeight; i++)
@@ -278,16 +278,16 @@ namespace MindRead_FunctionSet
 		}
 	}
 
-	void FunctionSet::SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, String ^ fileName)
+	void FunctionSet::SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, bool cover, String ^ fileName)
 	{
 		IO::FileStream^ fs;
-		String^ FilePath = ImageFolderPath;
+		String^ FilePath = SaveFolderPath;
 		IO::Directory::CreateDirectory(FilePath);
 		FilePath += fileName;
 
 		try
 		{
-			fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
+			fs = gcnew IO::FileStream((cover ? CheckFileExist(0, FilePath) : FilePath), IO::FileMode::CreateNew);
 
 			IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
 			for (int i = 0; i < nWidth*nHeight * channel; i++)
@@ -306,7 +306,7 @@ namespace MindRead_FunctionSet
 	void FunctionSet::SaveData_Append(String ^ Data, String ^ fileName)
 	{
 		IO::FileStream^ fs;
-		String^ FilePath = ImageFolderPath;
+		String^ FilePath = SaveFolderPath;
 		IO::Directory::CreateDirectory(FilePath);
 		FilePath += fileName;
 
@@ -333,7 +333,7 @@ namespace MindRead_FunctionSet
 	void FunctionSet::SaveStringData_Encoding(String ^ strMessage, String ^ fileName)
 	{
 		IO::FileStream^ fs;
-		String^ FilePath = ImageFolderPath;
+		String^ FilePath = SaveFolderPath;
 		IO::Directory::CreateDirectory(FilePath);
 		FilePath += fileName;
 
@@ -604,12 +604,12 @@ namespace MindRead_FunctionSet
 		else if (type->Equals(FILETYPE::FILETYPE_RAW))
 		{
 			array<byte>^ rawByte = (array<byte>^)this->mng->GetObject(FileName);
-			SaveData(rawByte, rawByte->Length, 1, 1, saveName);
+			SaveData(rawByte, rawByte->Length, 1, 1, false, saveName);
 		}
 		else if (type->Equals(FILETYPE::FILETYPE_BMP))
 		{
 			Bitmap^ img = (Bitmap^)this->mng->GetObject(FileName);
-			SaveBmp(img, 1, saveName);
+			SaveBmp(img, false, saveName);
 		}
 		(array<byte>^)this->mng->GetObject("HLConvert");
 	}

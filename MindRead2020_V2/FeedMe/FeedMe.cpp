@@ -60,12 +60,12 @@ int main(array<System::String ^> ^args)
 			//若餵ReadMe
 			if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 			{
-				Windows::Forms::MessageBox::Show("謝謝你餵我。",
+				Windows::Forms::MessageBox::Show("謝謝您餵我。",
 					"Thank you~",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Stop
 				);
-				Windows::Forms::MessageBox::Show("這是亞席大人留下來的，就送給你吧~",
+				Windows::Forms::MessageBox::Show("這是亞席大人留下來的，就送給您吧~",
 					"Gift",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::None
@@ -85,7 +85,7 @@ int main(array<System::String ^> ^args)
 			}
 			else if (FileName[FileName->Length - 1]->Equals("Key.txt"))
 			{
-				Windows::Forms::MessageBox::Show("嗯？這是KEY嗎？記得亞席大人有留下一些和它相關的訊息呢~就送你吧。",
+				Windows::Forms::MessageBox::Show("嗯？這是KEY嗎？記得亞席大人有留下一些和它相關的訊息呢~就送您吧。",
 					"Gift",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::None

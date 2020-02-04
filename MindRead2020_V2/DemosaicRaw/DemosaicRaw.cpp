@@ -41,6 +41,8 @@ int main(array<System::String ^> ^args)
 			{
 				for (int i = 0; i < args->Length; i++)
 				{
+					//MRFun->NLogMsg("Demosaic", String::Format("args length = {0:0}", args->Length));
+
 					IO::FileStream^ fs = gcnew IO::FileStream(args[i], IO::FileMode::Open);
 					array<String^>^ FileName = args[i]->Split('\\');
 
@@ -100,15 +102,17 @@ int main(array<System::String ^> ^args)
 					else
 					{
 						FileName = FileName[FileName->Length - 1]->Split('.');
-						if (FileName[1]->ToUpper()->Equals("RAW")) //檢查副檔名是否為raw圖
+						String^ EXName = FileName[1]->ToUpper();
+						if (!EXName->Equals("RAW")) //檢查副檔名是否為raw圖
 						{
 							Console::WriteLine(FileName[0] + " is not raw image.");
+							system("PAUSE");
 						}
 						else
 						{
 							try {
 								int nWidth, nHeight;
-								if (FileName[0]->Equals("TreasureImage"))
+								if (FileName[0]->Equals("TreasureImage") || FileName[0]->Contains("TreasureImageHLOut"))
 								{
 									Console::WriteLine("殺斃死");
 									Console::WriteLine("nWidth = 1920");
@@ -126,12 +130,22 @@ int main(array<System::String ^> ^args)
 								}
 
 								array<Byte>^ srcData = gcnew array<Byte>(nWidth*nHeight * 2);
-								array<Byte>^ outData = gcnew array<Byte>(nWidth*nHeight * 2);
+								array<Byte>^ outData = gcnew array<Byte>(nWidth*nHeight);
+								//MRFun->NLogMsg("Demosaic", "fs->Read start");
 								fs->Read(srcData, 0, nWidth*nHeight * 2);
 								fs->Close();
+								//MRFun->NLogMsg("Demosaic", "fs->Read pass");
 
+								//將16bit解為8bit的解碼
+								//MRFun->NLogMsg("Demosaic", "demosica start");
 								MRFun->demosaic(srcData, nWidth, nHeight, 1, outData);
-								MRFun->SaveData(outData, nWidth, nHeight, 2, "Test");
+								//MRFun->NLogMsg("Demosaic", "demosica pass");
+
+								Drawing::Bitmap^ outBmp = gcnew Drawing::Bitmap(nWidth, nHeight, Drawing::Imaging::PixelFormat::Format8bppIndexed);
+								MRFun->Raw2Bmp(outData, outBmp);
+								//MRFun->NLogMsg("Demosaic", "Raw2Bmp pass");
+								MRFun->SaveBmp(outBmp, true, FileName[0]);
+								//MRFun->NLogMsg("Demosaic", "SaveBmp pass");
 							}
 							catch (...)
 							{
@@ -142,9 +156,10 @@ int main(array<System::String ^> ^args)
 								);
 							}
 						}
-						break;
+						break; //break for loop
 					}
 				}
+				break; //break while loop
 			}
 		} while (1);
 	}

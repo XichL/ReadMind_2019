@@ -22,7 +22,8 @@ int main(array<System::String ^> ^args)
 			{
 				Console::WriteLine("【這是最後一關，需要丟入含有最終字串(FinalString)的內容的.xml檔案來取得解答】");
 				Console::WriteLine("【要挑戰嗎？要請打「Yes」、不要請打「No」】");
-				if (Console::ReadLine()->Equals("Yes"))
+				String^ strYesNo = Console::ReadLine();
+				if (strYesNo->Equals("Yes"))
 				{
 					Console::WriteLine("【相信您一定是突破重重機關才來到這裡的……】");
 					system("PAUSE");
@@ -142,13 +143,15 @@ int main(array<System::String ^> ^args)
 					}
 
 				}
-				else if (Console::ReadLine()->Equals("No"))
+				else if (strYesNo->Equals("No"))
 				{
 					Console::WriteLine("【不挑戰嗎？真可惜……】");
+					system("PAUSE");
 				}
 				else
 				{
 					Console::WriteLine("【聽不懂你說甚麼呢～】");
+					system("PAUSE");
 				}
 
 

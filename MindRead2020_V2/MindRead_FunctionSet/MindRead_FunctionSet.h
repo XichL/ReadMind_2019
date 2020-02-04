@@ -7,7 +7,7 @@
 
 #define DebguSBS true
 //#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\ImageData\\")
-#define ImageFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\")
+#define SaveFolderPath (System::IO::Path::GetDirectoryName(Windows::Forms::Application::ExecutablePath) + "\\")
 #define NLOG_DLLTAG	"[MindReadFunctionSet]"
 
 namespace MindRead_FunctionSet
@@ -60,9 +60,9 @@ namespace MindRead_FunctionSet
 		//¶s¿…±M•Œ
 		void SaveBmp(Drawing::Bitmap^ bmp, bool cover, String^ fileName);
 
-		void SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
-		void SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
-		void SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, String^ fileName);
+		void SaveData(array<USHORT>^ Data, int nWidth, int nHeight, int channel, bool cover, String^ fileName);
+		void SaveData(array<double>^ Data, int nWidth, int nHeight, int channel, bool cover, String^ fileName);
+		void SaveData(array<Byte>^ Data, int nWidth, int nHeight, int channel, bool cover, String^ fileName);
 
 		void SaveData_Append(String^ Data, String^ fileName);
 
