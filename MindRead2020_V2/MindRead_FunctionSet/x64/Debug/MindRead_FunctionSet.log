@@ -1,0 +1,8 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(2110,5): warning MSB3274: 無法解析主要參考 "NLog"，因為它是針對 ".NETFramework,Version=v4.5" 架構所建置。這個版本高於目前的目標架構 ".NETFramework,Version=v4.0"。
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(2110,5): warning MSB3268: 無法解析主要參考 "NLog"，因為它在架構組件 "System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" 上有間接相依性，但此組件無法在目前設為目標的架構中解析。".NETFramework,Version=v4.0"。若要解決此問題，請移除參考 "NLog"，或將應用程式的目標重定為包含 "System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" 的架構版本。
+  stdafx.cpp
+c1xx : warning C4199: 不支援 C++/CLI、C++/CX 或 OpenMP 的兩階段名稱查閱; 請使用 /Zc:twoPhase-
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\msclr\marshal.h(222): error C3861: '_This_conversion_is_not_supported': 找不到識別項
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\msclr\marshal.h(224): note: 查看要編譯的 類別 樣板 具現化 'msclr::interop::error_reporting_helper<_To_Type,_From_Type,false>' 參考
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\msclr\marshal.h(233): error C3861: '_This_conversion_requires_a_context': 找不到識別項
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\msclr\marshal.h(235): note: 查看要編譯的 類別 樣板 具現化 'msclr::interop::error_reporting_helper<_To_Type,_From_Type,true>' 參考
