@@ -20,15 +20,22 @@ int main(array<System::String ^> ^args)
 		{
 			if (args->Length == 0)
 			{
+				MRFun->NLogMsg(String::Format("雙擊 DemosaicRaw.exe"));
+
 				///Out put What is demosaic
 				MRFun->GetSourceFile("raw檔是什麼", FILETYPE::FILETYPE_TXT,
 					"raw檔是什麼.txt");
+				MRFun->NLogMsg(String::Format("DemosaicRaw.exe 釋出 raw檔是什麼.txt"));
+
 				break;
 			}
 			else if (args->Length > 1)
 			{
+				MRFun->NLogMsg(String::Format("丟 {0:0}個檔案 到 DemosaicRaw.exe", args->Length));
+
 				Console::WriteLine("餵太多囉~");
 				system("PAUSE");
+
 				//Windows::Forms::MessageBox::Show("餵太多囉~",
 				//	"",
 				//	MessageBoxButtons::OK,
@@ -46,12 +53,15 @@ int main(array<System::String ^> ^args)
 					IO::FileStream^ fs = gcnew IO::FileStream(args[i], IO::FileMode::Open);
 					array<String^>^ FileName = args[i]->Split('\\');
 
+					MRFun->NLogMsg(String::Format("丟 {0:0} 到 DemosaicRaw.exe", FileName[FileName->Length - 1]));
+
 					//若餵ReadMe
 					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 					{
 						///釋出TreasureImagePart2.raw
 						MRFun->GetSourceFile("TreasureImage2", FILETYPE::FILETYPE_RAW,
 							"TreasureImagePart2.raw");
+						MRFun->NLogMsg(String::Format("DemosaicRaw.exe 釋出 TreasureImagePart2.raw"));
 
 						//讀取內容，檢查是否存在H1~3
 						//檢查H1~3中是否有Hint
@@ -92,7 +102,7 @@ int main(array<System::String ^> ^args)
 								catch (System::Exception^ e)
 								{
 									MRFun->NLogMsg("DemosaicRaw",
-										String::Format("Modify ReadMe : {0:0}", e));
+										String::Format("Modify content error : {0:0}", e));
 									return 0;
 								}
 							}
@@ -101,6 +111,8 @@ int main(array<System::String ^> ^args)
 					}
 					else
 					{
+						MRFun->NLogMsg(String::Format("丟 {0:0} 到 DemosaicRaw.exe", FileName));
+
 						FileName = FileName[FileName->Length - 1]->Split('.');
 						String^ EXName = FileName[1]->ToUpper();
 						if (!EXName->Equals("RAW")) //檢查副檔名是否為raw圖
@@ -146,6 +158,8 @@ int main(array<System::String ^> ^args)
 								//MRFun->NLogMsg("Demosaic", "Raw2Bmp pass");
 								MRFun->SaveBmp(outBmp, true, FileName[0]);
 								//MRFun->NLogMsg("Demosaic", "SaveBmp pass");
+
+								MRFun->NLogMsg(String::Format("DemosaicRaw.exe 釋出 {0:0}.bmp", FileName[0]));
 							}
 							catch (...)
 							{

@@ -21,15 +21,22 @@ int main(array<System::String ^> ^args)
 		{
 			if (args->Length == 0)
 			{
+				MRFun->NLogMsg(String::Format("雙擊 HighLowConverter.exe"));
+
 				///output what is HLConverter
 				MRFun->GetSourceFile("HighLow轉換的用意", FILETYPE::FILETYPE_TXT,
 					"HighLow轉換的用意.txt");
+				MRFun->NLogMsg(String::Format("HighLowConverter.exe 釋出 HighLow轉換的用意.txt"));
+
 				break;
 			}
 			else if (args->Length > 1)
 			{
+				MRFun->NLogMsg(String::Format("丟 {0:0}個檔案 到 HighLowConverter.exe", args->Length));
+
 				Console::WriteLine("餵太多囉~");
 				system("PAUSE");
+
 				break;
 			}
 			else
@@ -40,12 +47,15 @@ int main(array<System::String ^> ^args)
 					array<String^>^ FileName = args[i]->Split('\\');
 					fs->Close();
 
+					MRFun->NLogMsg(String::Format("丟 {0:0} 到 HighLowConverter.exe", FileName[FileName->Length - 1]));
+
 					//若餵ReadMe
 					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 					{
 						///釋出TreasureImagePart1.raw
 						MRFun->GetSourceFile("TreasureImage1", FILETYPE::FILETYPE_RAW,
 							"TreasureImagePart1.raw");
+						MRFun->NLogMsg(String::Format("HighLowConverter.exe 釋出 TreasureImagePart1.raw"));
 
 						//讀取內容，檢查是否存在H1~3
 						//檢查H1~3中是否有Hint
@@ -86,7 +96,7 @@ int main(array<System::String ^> ^args)
 								catch (System::Exception^ e)
 								{
 									MRFun->NLogMsg("HLConverter",
-										String::Format("Modify ReadMe : {0:0}", e));
+										String::Format("Modify content error : {0:0}", e));
 									return 0;
 								}
 							}
@@ -116,6 +126,8 @@ int main(array<System::String ^> ^args)
 							MRFun->HLConverter(readByte, 2, outputHLByte);
 							//儲存HLConvert的結果
 							MRFun->SaveData(outputHLByte, readByte->Length, 1, 1, true, outputName);
+							MRFun->NLogMsg(String::Format("HighLowConverter.exe 釋出 {0:0}", outputName));
+
 						}
 						catch (...)
 						{

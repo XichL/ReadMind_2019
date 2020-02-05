@@ -20,6 +20,8 @@ int main(array<System::String ^> ^args)
 		{
 			if (args->Length == 0)
 			{
+				MRFun->NLogMsg(String::Format("雙擊 FinalStage.exe"));
+
 				Console::WriteLine("【這是最後一關，需要丟入含有最終字串(FinalString)的內容的.xml檔案來取得解答】");
 				Console::WriteLine("【要挑戰嗎？要請打「Yes」、不要請打「No」】");
 				String^ strYesNo = Console::ReadLine();
@@ -31,11 +33,15 @@ int main(array<System::String ^> ^args)
 					system("PAUSE");
 					Console::WriteLine("【請輸入「完整檔案名稱」(記得加副檔名喔)：】");
 					String^ xmlName = Console::ReadLine();
+					MRFun->NLogMsg("輸入「完整檔案名稱」", String::Format("在 FinalStage.exe 中鍵入 {0:0}", xmlName));
 
 					array<String^>^ xmlFileName = xmlName->Split('.');
-					if (xmlFileName[1]->ToUpper()->Equals("XML")) //檢查副檔名是否為raw圖
+					String^ xmlExtCheck = xmlFileName[1]->ToUpper();
+
+					if (xmlExtCheck->Equals("XML")) //檢查副檔名是否為raw圖
 					{
 						Console::WriteLine(xmlFileName[0] + " is not xml file.");
+						system("PAUSE");
 					}
 					else
 					{
@@ -60,6 +66,8 @@ int main(array<System::String ^> ^args)
 									if (idx >= width)
 									{
 										Console::WriteLine("【寬好像不合哦？】");
+										system("PAUSE");
+
 										break;
 									}
 									realData[idx] = loadData[i];
@@ -70,11 +78,13 @@ int main(array<System::String ^> ^args)
 							if (!xmlPass)
 							{
 								Console::WriteLine("【看來還沒準備好呢～】");
+								system("PAUSE");
 								break;
 							}
 							Console::WriteLine("【終於來到最後了呢！】");
 							system("PAUSE");
 							Console::WriteLine("《請插入鑰匙》");
+							MRFun->NLogMsg("《請插入鑰匙》", String::Format("在 FinalStage.exe 中鍵入 {0:0}", xmlName));
 
 							String^ key = Console::ReadLine();
 							array<Byte>^ xorKey = gcnew array<Byte>(4);
@@ -131,6 +141,9 @@ int main(array<System::String ^> ^args)
 								system("PAUSE");
 							}
 							MRFun->ASCII8bitToLetter(encodeString, outString);
+
+							MRFun->SaveData_Append(outString, "FinalString.txt");
+							MRFun->NLogMsg(String::Format("FinalStage.exe 釋出 FinalString.txt"));
 						}
 						catch (...)
 						{
@@ -159,6 +172,8 @@ int main(array<System::String ^> ^args)
 			}
 			else if (args->Length > 1)
 			{
+				MRFun->NLogMsg(String::Format("丟 {0:0}個檔案 到 FinalStage.exe", args->Length));
+
 				Console::WriteLine("餵太多囉~");
 				system("PAUSE");
 				//Windows::Forms::MessageBox::Show("餵太多囉~",
@@ -175,6 +190,8 @@ int main(array<System::String ^> ^args)
 				{
 					IO::FileStream^ fs = gcnew IO::FileStream(args[i], IO::FileMode::Open);
 					array<String^>^ FileName = args[i]->Split('\\');
+
+					MRFun->NLogMsg(String::Format("丟 {0:0} 到 FinalStage.exe", FileName[FileName->Length - 1]));
 
 					//若餵ReadMe
 					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))

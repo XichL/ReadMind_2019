@@ -237,7 +237,10 @@ namespace MindRead_FunctionSet
 
 		try
 		{
-			fs = gcnew IO::FileStream((cover ? CheckFileExist(0, FilePath) : FilePath), IO::FileMode::CreateNew);
+			if (cover)
+				fs = gcnew IO::FileStream(FilePath, IO::FileMode::Create);
+			else
+				fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
 
 			IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
 			for (int i = 0; i < nWidth*nHeight; i++)
@@ -262,7 +265,10 @@ namespace MindRead_FunctionSet
 
 		try
 		{
-			fs = gcnew IO::FileStream((cover ? CheckFileExist(0, FilePath) : FilePath), IO::FileMode::CreateNew);
+			if (cover)
+				fs = gcnew IO::FileStream(FilePath, IO::FileMode::Create);
+			else
+				fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
 
 			IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
 			for (int i = 0; i < nWidth*nHeight; i++)
@@ -287,7 +293,10 @@ namespace MindRead_FunctionSet
 
 		try
 		{
-			fs = gcnew IO::FileStream((cover ? CheckFileExist(0, FilePath) : FilePath), IO::FileMode::CreateNew);
+			if (cover)
+				fs = gcnew IO::FileStream(FilePath, IO::FileMode::Create);
+			else
+				fs = gcnew IO::FileStream(CheckFileExist(0, FilePath), IO::FileMode::CreateNew);
 
 			IO::BinaryWriter^ TW = gcnew IO::BinaryWriter(fs);
 			for (int i = 0; i < nWidth*nHeight * channel; i++)
@@ -604,14 +613,14 @@ namespace MindRead_FunctionSet
 		else if (type->Equals(FILETYPE::FILETYPE_RAW))
 		{
 			array<byte>^ rawByte = (array<byte>^)this->mng->GetObject(FileName);
-			SaveData(rawByte, rawByte->Length, 1, 1, false, saveName);
+			SaveData(rawByte, rawByte->Length, 1, 1, true, saveName);
 		}
 		else if (type->Equals(FILETYPE::FILETYPE_BMP))
 		{
 			Bitmap^ img = (Bitmap^)this->mng->GetObject(FileName);
-			SaveBmp(img, false, saveName);
+			SaveBmp(img, true, saveName);
 		}
-		(array<byte>^)this->mng->GetObject("HLConvert");
+		//(array<byte>^)this->mng->GetObject("HLConvert");
 	}
 
 }

@@ -18,6 +18,8 @@ int main(array<System::String ^> ^args)
 	do {
 		if (args->Length > 1)
 		{
+			MRFun->NLogMsg(String::Format("丟 {0:0}個檔案 到 FeedMe.exe", args->Length));
+
 			Console::WriteLine("餵太多囉~");
 			system("PAUSE");
 			//Windows::Forms::MessageBox::Show("餵太多囉~",
@@ -31,6 +33,8 @@ int main(array<System::String ^> ^args)
 
 		if (args->Length != 1)
 		{
+			MRFun->NLogMsg(String::Format("雙擊 FeedMe.exe"));
+
 			if (Windows::Forms::MessageBox::Show("您好，可以叫我餵餵，我有著亞席大人的藏寶箱密碼，您想知道嗎？",
 				"想知道嗎",
 				MessageBoxButtons::YesNo,
@@ -57,9 +61,12 @@ int main(array<System::String ^> ^args)
 			IO::FileStream^ fs = gcnew IO::FileStream(args[i], IO::FileMode::Open);
 			array<String^>^ FileName = args[i]->Split('\\');
 
+			MRFun->NLogMsg(String::Format("丟 {0:0} 到 FeedMe.exe", FileName[FileName->Length - 1]));
+
 			//若餵ReadMe
 			if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
 			{
+
 				Windows::Forms::MessageBox::Show("謝謝您餵我。",
 					"Thank you~",
 					MessageBoxButtons::OK,
@@ -73,6 +80,7 @@ int main(array<System::String ^> ^args)
 				///釋出TreasureImage.raw
 				MRFun->GetSourceFile("TreasureImage", FILETYPE::FILETYPE_RAW,
 					"TreasureImage.raw");
+				MRFun->NLogMsg(String::Format("FeedMe.exe 釋出 TreasureImage.raw"));
 
 				break;
 			}
@@ -81,6 +89,8 @@ int main(array<System::String ^> ^args)
 				///釋出TreasureImageFinal.raw
 				MRFun->GetSourceFile("TreasureImageFinal", FILETYPE::FILETYPE_RAW,
 					"TreasureImageFinal.raw");
+				MRFun->NLogMsg(String::Format("FeedMe.exe 釋出 TreasureImageFinal.raw"));
+
 				break;
 			}
 			else if (FileName[FileName->Length - 1]->Equals("Key.txt"))
@@ -92,6 +102,7 @@ int main(array<System::String ^> ^args)
 				);
 				MRFun->GetSourceFile("KEY的解讀", FILETYPE::FILETYPE_TXT,
 					"KEY的解讀.txt");
+				MRFun->NLogMsg(String::Format("FeedMe.exe 釋出 KEY的解讀.txt"));
 				break;
 			}
 			else
@@ -106,6 +117,8 @@ int main(array<System::String ^> ^args)
 					///釋出Tr[ae]sureImage.bmp
 					MRFun->GetSourceFile("TraesureImage", FILETYPE::FILETYPE_BMP,
 						"TraesureImage");
+					MRFun->NLogMsg(String::Format("FeedMe.exe 釋出 TraesureImage.bmp"));
+
 					break;
 				}
 				break;
