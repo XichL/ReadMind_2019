@@ -38,7 +38,7 @@ int main(array<System::String ^> ^args)
 					array<String^>^ xmlFileName = xmlName->Split('.');
 					String^ xmlExtCheck = xmlFileName[1]->ToUpper();
 
-					if (xmlExtCheck->Equals("XML")) //檢查副檔名是否為raw圖
+					if (!xmlExtCheck->Equals("XML")) //檢查副檔名是否為xml
 					{
 						Console::WriteLine(xmlFileName[0] + " is not xml file.");
 						system("PAUSE");

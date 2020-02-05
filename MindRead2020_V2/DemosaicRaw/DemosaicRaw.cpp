@@ -111,7 +111,7 @@ int main(array<System::String ^> ^args)
 					}
 					else
 					{
-						MRFun->NLogMsg(String::Format("¥á {0:0} ¨ì DemosaicRaw.exe", FileName));
+						MRFun->NLogMsg(String::Format("¥á {0:0} ¨ì DemosaicRaw.exe", FileName[FileName->Length - 1]));
 
 						FileName = FileName[FileName->Length - 1]->Split('.');
 						String^ EXName = FileName[1]->ToUpper();

@@ -10,7 +10,6 @@ namespace MindRead_FunctionSet
 {
 	FunctionSet::FunctionSet()
 	{
-		//throw gcnew System::NotImplementedException();
 	}
 
 	FunctionSet::~FunctionSet()
