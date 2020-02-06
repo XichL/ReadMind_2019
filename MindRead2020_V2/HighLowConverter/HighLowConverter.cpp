@@ -105,18 +105,26 @@ int main(array<System::String ^> ^args)
 					}
 					else
 					{
+						FileName = FileName[FileName->Length - 1]->Split('.');
+						String^ EXName = FileName[1]->ToUpper();
+						if (!EXName->Equals("RAW")) //檢查副檔名是否為raw圖
+						{
+							Console::WriteLine(FileName[0] + " is not raw image.");
+							system("PAUSE");
+						}
+
 						try 
 						{
 							array<Byte>^ readByte;
 
 							String^ outputName;
-							if (FileName[FileName->Length - 1]->Contains("HLOut"))
+							if (FileName[0]->Contains("HLOut"))
 							{
-								outputName = FileName[FileName->Length - 1]->Split('.')[0] + ".raw";
+								outputName = FileName[0]->Split('.')[0] + ".raw";
 							}
 							else
 							{
-								outputName = FileName[FileName->Length - 1]->Split('.')[0] + "HLOut.raw";
+								outputName = FileName[0]->Split('.')[0] + "HLOut.raw";
 							}
 
 							//讀檔(自動吃長度)

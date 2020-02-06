@@ -209,6 +209,10 @@
   <ItemGroup>
     <EmbeddedResource Include="..\3rdparty\Resource.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\3rdparty\Resource\TreasureImagePart1HLOut.bmp" />
+    <Image Include="..\3rdparty\Resource\TreasureImagePart2HLOut.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,0 +1,16 @@
+
+*.db
+*.ipch
+*.db-shm
+*.db-wal
+MindRead2020_V2/.vs/MindRead20202XX/v15/.suo
+*.asm
+*.obj
+*.res
+*.log
+*.pch
+*.tlog
+*.CopyComplete
+*.cache
+*.pdb
+*.idb

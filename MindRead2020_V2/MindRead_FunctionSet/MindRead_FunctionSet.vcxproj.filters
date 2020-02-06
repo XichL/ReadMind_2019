@@ -49,4 +49,12 @@
       <Filter>資源檔</Filter>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\3rdparty\Resource\TreasureImagePart1HLOut.bmp">
+      <Filter>資源檔</Filter>
+    </Image>
+    <Image Include="..\3rdparty\Resource\TreasureImagePart2HLOut.bmp">
+      <Filter>資源檔</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

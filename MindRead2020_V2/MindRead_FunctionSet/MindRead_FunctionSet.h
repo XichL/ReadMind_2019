@@ -85,6 +85,9 @@ namespace MindRead_FunctionSet
 
 		//取得資源檔內容
 		void GetSourceFile(String^ FileName, FILETYPE^ type, String^ saveName);
+		Bitmap^ GetSourceFile_BMP(String^ FileName);
+		String^ GetSourceFile_String(String^ FileName);
+		array<byte>^ GetSourceFile_ArrByte(String^ FileName);
 
 	private:
 		NLog::Logger^ logger = NLog::LogManager::GetLogger("ProjectName");

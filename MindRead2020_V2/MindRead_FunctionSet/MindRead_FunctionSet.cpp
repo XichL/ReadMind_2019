@@ -319,7 +319,7 @@ namespace MindRead_FunctionSet
 		FilePath += fileName;
 
 		String^ FILE_NAME = FilePath;
-		String^ str = Environment::NewLine + "解=" + Data;
+		String^ str = Data+ Environment::NewLine;
 		try
 		{
 			if (!File::Exists(FILE_NAME))
@@ -620,6 +620,21 @@ namespace MindRead_FunctionSet
 			SaveBmp(img, true, saveName);
 		}
 		//(array<byte>^)this->mng->GetObject("HLConvert");
+	}
+
+	Bitmap ^ FunctionSet::GetSourceFile_BMP(String ^ FileName)
+	{
+		return ((Bitmap^)this->mng->GetObject(FileName));
+	}
+
+	String ^ FunctionSet::GetSourceFile_String(String ^ FileName)
+	{
+		return ((String^)this->mng->GetObject(FileName));
+	}
+
+	array<byte>^ FunctionSet::GetSourceFile_ArrByte(String ^ FileName)
+	{
+		return ((array<byte>^)this->mng->GetObject(FileName));
 	}
 
 }

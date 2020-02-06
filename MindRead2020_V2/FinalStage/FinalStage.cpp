@@ -22,7 +22,7 @@ int main(array<System::String ^> ^args)
 			{
 				MRFun->NLogMsg(String::Format("雙擊 FinalStage.exe"));
 
-				Console::WriteLine("【這是最後一關，需要丟入含有最終字串(FinalString)的內容的.xml檔案來取得解答】");
+				Console::WriteLine("【這是最後一關，需要輸入含有最終字串(FinalString)的內容的.xml檔案來取得解答】");
 				Console::WriteLine("【要挑戰嗎？要請打「Yes」、不要請打「No」】");
 				String^ strYesNo = Console::ReadLine();
 				if (strYesNo->Equals("Yes"))
@@ -142,8 +142,10 @@ int main(array<System::String ^> ^args)
 							}
 							MRFun->ASCII8bitToLetter(encodeString, outString);
 
-							MRFun->SaveData_Append(outString, "FinalString.txt");
+							MRFun->SaveData_Append("Ans = " + outString, "FinalString.txt");
 							MRFun->NLogMsg(String::Format("FinalStage.exe 釋出 FinalString.txt"));
+
+							system("PAUSE");
 						}
 						catch (...)
 						{

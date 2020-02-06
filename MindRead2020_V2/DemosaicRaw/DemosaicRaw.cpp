@@ -4,6 +4,8 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace MindRead_FunctionSet;
 
+bool ImageCompareByString(Drawing::Bitmap^ firstImage, Drawing::Bitmap^ secondImage);
+
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
@@ -111,8 +113,6 @@ int main(array<System::String ^> ^args)
 					}
 					else
 					{
-						MRFun->NLogMsg(String::Format("丟 {0:0} 到 DemosaicRaw.exe", FileName[FileName->Length - 1]));
-
 						FileName = FileName[FileName->Length - 1]->Split('.');
 						String^ EXName = FileName[1]->ToUpper();
 						if (!EXName->Equals("RAW")) //檢查副檔名是否為raw圖
@@ -141,6 +141,13 @@ int main(array<System::String ^> ^args)
 									nHeight = Convert::ToInt32(Console::ReadLine());
 								}
 
+								if (fs->Length != nWidth * nHeight * 2)
+								{
+									Console::WriteLine(String::Format("nWidth or nHeight wrong"));
+									system("pause");
+									break;
+								}
+
 								array<Byte>^ srcData = gcnew array<Byte>(nWidth*nHeight * 2);
 								array<Byte>^ outData = gcnew array<Byte>(nWidth*nHeight);
 								//MRFun->NLogMsg("Demosaic", "fs->Read start");
@@ -150,14 +157,35 @@ int main(array<System::String ^> ^args)
 
 								//將16bit解為8bit的解碼
 								//MRFun->NLogMsg("Demosaic", "demosica start");
+
 								MRFun->demosaic(srcData, nWidth, nHeight, 1, outData);
 								//MRFun->NLogMsg("Demosaic", "demosica pass");
 
 								Drawing::Bitmap^ outBmp = gcnew Drawing::Bitmap(nWidth, nHeight, Drawing::Imaging::PixelFormat::Format8bppIndexed);
 								MRFun->Raw2Bmp(outData, outBmp);
-								//MRFun->NLogMsg("Demosaic", "Raw2Bmp pass");
+
+								//part1 = part1
+								if (ImageCompareByString(MRFun->GetSourceFile_BMP("TreasureImagePart1HLOut"), outBmp))
+								{
+									String^ strID1 = "ID1 = 01010111001100100001001101010000000011010101001000001011001010100011001100101010000111110010000100101011001010010010100100100111";
+									MRFun->SaveData_Append(strID1, "Log\\TreasureImageContent.txt");
+									MRFun->NLogMsg(String::Format("將 [TreasureImageContent.txt] 存在 [Log資料夾]", FileName[0]));
+
+									Console::WriteLine(String::Format("為方便檢查，在Log新增一個檔案"));
+									system("PAUSE");
+								}
+								//part2 = part2
+								if (ImageCompareByString(MRFun->GetSourceFile_BMP("TreasureImagePart2HLOut"), outBmp))
+								{
+									String^ strID2 = "ID2 = 00110110001111000001111000101001001111110011111001010000001101100101000100010010000101100010010100101000001000110101011101010100";
+									MRFun->SaveData_Append(strID2, "Log\\TreasureImageContent.txt");
+									MRFun->NLogMsg(String::Format("將 [TreasureImageContent.txt] 存在 [Log資料夾]", FileName[0]));
+									
+									Console::WriteLine(String::Format("為方便檢查，在Log新增一個檔案"));
+									system("PAUSE");
+								}
 								MRFun->SaveBmp(outBmp, true, FileName[0]);
-								//MRFun->NLogMsg("Demosaic", "SaveBmp pass");
+
 
 								MRFun->NLogMsg(String::Format("DemosaicRaw.exe 釋出 {0:0}.bmp", FileName[0]));
 							}
@@ -183,4 +211,22 @@ int main(array<System::String ^> ^args)
 	}
 
 	return 0;
+}
+
+bool ImageCompareByString(Drawing::Bitmap^ firstImage, Drawing::Bitmap^ secondImage)
+{
+	IO::MemoryStream^ ms = gcnew IO::MemoryStream();
+	firstImage->Save(ms, Drawing::Imaging::ImageFormat::Bmp);
+	String^ firstBitmap = Convert::ToBase64String(ms->ToArray());
+	ms->Position = 0;
+	secondImage->Save(ms, Drawing::Imaging::ImageFormat::Bmp);
+	String^ secondBitmap = Convert::ToBase64String(ms->ToArray());
+	if (firstBitmap->Equals(secondBitmap))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

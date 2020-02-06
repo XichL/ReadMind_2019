@@ -148,4 +148,10 @@
   <data name="HighLow轉換的用意" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resource\HighLow轉換的用意.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="TreasureImagePart1HLOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resource\TreasureImagePart1HLOut.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TreasureImagePart2HLOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resource\TreasureImagePart2HLOut.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
