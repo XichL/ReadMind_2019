@@ -110,7 +110,7 @@ int main(array<System::String ^> ^args)
 				FileName = FileName[FileName->Length - 1]->Split('.');
 				if (FileName[1]->ToUpper() != "RAW") //檢查副檔名是否為raw圖
 				{
-					Console::WriteLine(FileName[0] + " is not raw image.");
+					Console::WriteLine("嚼嚼～");
 				}
 				else
 				{

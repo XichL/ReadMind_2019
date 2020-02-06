@@ -117,7 +117,11 @@ copy "$(SolutionDir)3rdparty\NLog.dll" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\Resource\這是一張圖片.txt" "$(OutDir)MindReadSet"
-copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"</Command>
+copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"
+
+md "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\Log.txt" "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\LogReader.exe" "$(OutDir)MindReadSet\Log"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -147,7 +151,11 @@ copy "$(SolutionDir)3rdparty\NLog.dll" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\Resource\這是一張圖片.txt" "$(OutDir)MindReadSet"
-copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"</Command>
+copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"
+
+md "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\Log.txt" "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\LogReader.exe" "$(OutDir)MindReadSet\Log"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -181,7 +189,11 @@ copy "$(SolutionDir)3rdparty\NLog.dll" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\Resource\這是一張圖片.txt" "$(OutDir)MindReadSet"
-copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"</Command>
+copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"
+
+md "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\Log.txt" "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\LogReader.exe" "$(OutDir)MindReadSet\Log"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -215,7 +227,11 @@ copy "$(SolutionDir)3rdparty\NLog.dll" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\NLog.config" "$(OutDir)MindReadSet"
 copy "$(SolutionDir)3rdparty\Resource\這是一張圖片.txt" "$(OutDir)MindReadSet"
-copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"</Command>
+copy "$(SolutionDir)3rdparty\Resource\ReadMe.txt" "$(OutDir)MindReadSet"
+
+md "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\Log.txt" "$(OutDir)MindReadSet\Log"
+copy "$(SolutionDir)3rdparty\Resource\LogReader.exe" "$(OutDir)MindReadSet\Log"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

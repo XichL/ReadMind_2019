@@ -91,7 +91,7 @@ int main(array<System::String ^> ^args)
 							if (key->Equals("STOCKING"))
 							{
 								Console::WriteLine("¡m±K½X¥¿½T¡n");
-								system("PAUSE");
+								//system("PAUSE");
 								xorKey[0] = 0;
 								xorKey[1] = 1;
 								xorKey[2] = 1;
@@ -103,7 +103,7 @@ int main(array<System::String ^> ^args)
 								array<Byte>^ randomByte = gcnew array<Byte>(3);
 								rdm->NextBytes(randomByte);
 								Console::WriteLine("¡K¡K");
-								system("PAUSE");
+								//system("PAUSE");
 								xorKey[0] = randomByte[0];
 								xorKey[1] = randomByte[1];
 								xorKey[2] = randomByte[2];

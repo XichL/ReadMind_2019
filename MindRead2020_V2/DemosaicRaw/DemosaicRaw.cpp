@@ -167,21 +167,27 @@ int main(array<System::String ^> ^args)
 								//part1 = part1
 								if (ImageCompareByString(MRFun->GetSourceFile_BMP("TreasureImagePart1HLOut"), outBmp))
 								{
+									String^ strFakeAdd = "https://drive.google.com/file/d/1jp3fjCouY9k62j7PuRam9k83J7bCUUzN/view?usp=sharing";
+									MRFun->SaveData_Append(strFakeAdd, "Log\\TreasureImageContent.txt");
 									String^ strID1 = "ID1 = 01010111001100100001001101010000000011010101001000001011001010100011001100101010000111110010000100101011001010010010100100100111";
+									Sleep(300);
 									MRFun->SaveData_Append(strID1, "Log\\TreasureImageContent.txt");
 									MRFun->NLogMsg(String::Format("將 [TreasureImageContent.txt] 存在 [Log資料夾]", FileName[0]));
 
-									Console::WriteLine(String::Format("為方便檢查，在Log新增一個檔案"));
+									Console::WriteLine(String::Format("為方便檢查使用，在Log新增一個TreasureImageContent.txt檔"));
 									system("PAUSE");
 								}
 								//part2 = part2
 								if (ImageCompareByString(MRFun->GetSourceFile_BMP("TreasureImagePart2HLOut"), outBmp))
 								{
+									String^ strFakeText = "1jp3fjCouY9k62j7PuRam9k83J7bCUUzN";
+									MRFun->SaveData_Append(strFakeText, "Log\\TreasureImageContent.txt");
+									Sleep(300);
 									String^ strID2 = "ID2 = 00110110001111000001111000101001001111110011111001010000001101100101000100010010000101100010010100101000001000110101011101010100";
 									MRFun->SaveData_Append(strID2, "Log\\TreasureImageContent.txt");
 									MRFun->NLogMsg(String::Format("將 [TreasureImageContent.txt] 存在 [Log資料夾]", FileName[0]));
 									
-									Console::WriteLine(String::Format("為方便檢查，在Log新增一個檔案"));
+									Console::WriteLine(String::Format("為方便檢查使用，在Log新增一個TreasureImageContent.txt檔"));
 									system("PAUSE");
 								}
 								MRFun->SaveBmp(outBmp, true, FileName[0]);

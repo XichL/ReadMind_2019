@@ -331,6 +331,7 @@ namespace MindRead_FunctionSet
 				fs = gcnew FileStream(FILE_NAME, FileMode::Append);
 			}
 			fs->Write(asciiEncoding->GetBytes(str), 0, asciiEncoding->GetByteCount(str));
+			fs->Close();
 		}
 		catch (System::Exception^ e)
 		{

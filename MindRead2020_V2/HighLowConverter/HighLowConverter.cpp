@@ -112,38 +112,40 @@ int main(array<System::String ^> ^args)
 							Console::WriteLine(FileName[0] + " is not raw image.");
 							system("PAUSE");
 						}
-
-						try 
+						else
 						{
-							array<Byte>^ readByte;
-
-							String^ outputName;
-							if (FileName[0]->Contains("HLOut"))
+							try
 							{
-								outputName = FileName[0]->Split('.')[0] + ".raw";
+								array<Byte>^ readByte;
+
+								String^ outputName;
+								if (FileName[0]->Contains("HLOut"))
+								{
+									outputName = FileName[0]->Split('.')[0] + ".raw";
+								}
+								else
+								{
+									outputName = FileName[0]->Split('.')[0] + "HLOut.raw";
+								}
+
+								//讀檔(自動吃長度)
+								MRFun->DataLoad_AutoSize(args[i], readByte);
+								//根據長度定義outputArray
+								array<Byte>^ outputHLByte = gcnew array<Byte>(readByte->Length);
+								MRFun->HLConverter(readByte, 2, outputHLByte);
+								//儲存HLConvert的結果
+								MRFun->SaveData(outputHLByte, readByte->Length, 1, 1, true, outputName);
+								MRFun->NLogMsg(String::Format("HighLowConverter.exe 釋出 {0:0}", outputName));
+
 							}
-							else
+							catch (...)
 							{
-								outputName = FileName[0]->Split('.')[0] + "HLOut.raw";
+								Windows::Forms::MessageBox::Show("啊哈哈掛掉惹 P:",
+									"UCCU",
+									MessageBoxButtons::OK,
+									MessageBoxIcon::Stop
+								);
 							}
-
-							//讀檔(自動吃長度)
-							MRFun->DataLoad_AutoSize(args[i], readByte);
-							//根據長度定義outputArray
-							array<Byte>^ outputHLByte = gcnew array<Byte>(readByte->Length);
-							MRFun->HLConverter(readByte, 2, outputHLByte);
-							//儲存HLConvert的結果
-							MRFun->SaveData(outputHLByte, readByte->Length, 1, 1, true, outputName);
-							MRFun->NLogMsg(String::Format("HighLowConverter.exe 釋出 {0:0}", outputName));
-
-						}
-						catch (...)
-						{
-							Windows::Forms::MessageBox::Show("啊哈哈掛掉惹 P:",
-								"UCCU",
-								MessageBoxButtons::OK,
-								MessageBoxIcon::Stop
-							);
 						}
 					}
 				}
