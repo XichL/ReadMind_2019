@@ -196,7 +196,7 @@ int main(array<System::String ^> ^args)
 					MRFun->NLogMsg(String::Format("丟 {0:0} 到 FinalStage.exe", FileName[FileName->Length - 1]));
 
 					//若餵ReadMe
-					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
+					if (FileName[FileName->Length - 1]->Equals("這是一張圖片.txt"))
 					{
 						///釋出key
 						MRFun->GetSourceFile("Key", FILETYPE::FILETYPE_TXT,
@@ -206,7 +206,7 @@ int main(array<System::String ^> ^args)
 						//檢查H1~3中是否有Hint
 						//"Final，W ? ? ? ? xHeight"
 						fs->Close();
-						System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(args[i]);
+						System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(EXEPath + "\\ReadMe.txt");
 						int HintNum = 0;
 						bool FindHint = false;
 						while (!readFile->EndOfStream)
@@ -234,7 +234,7 @@ int main(array<System::String ^> ^args)
 								try
 								{
 									System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
-									fs = gcnew IO::FileStream(args[i], IO::FileMode::Append);
+									fs = gcnew IO::FileStream(EXEPath + "\\ReadMe.txt", IO::FileMode::Append);
 									fs->Write(asciiEncoding->GetBytes(strNewHint), 0, asciiEncoding->GetByteCount(strNewHint));
 									break;
 								}

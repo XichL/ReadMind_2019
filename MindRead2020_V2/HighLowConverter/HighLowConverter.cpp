@@ -50,7 +50,7 @@ int main(array<System::String ^> ^args)
 					MRFun->NLogMsg(String::Format("丟 {0:0} 到 HighLowConverter.exe", FileName[FileName->Length - 1]));
 
 					//若餵ReadMe
-					if (FileName[FileName->Length - 1]->Equals("ReadMe.txt"))
+					if (FileName[FileName->Length - 1]->Equals("這是一張圖片.txt"))
 					{
 						///釋出TreasureImagePart1.raw
 						MRFun->GetSourceFile("TreasureImage1", FILETYPE::FILETYPE_RAW,
@@ -61,7 +61,7 @@ int main(array<System::String ^> ^args)
 						//檢查H1~3中是否有Hint
 						//"Part2，WPart1x1200"
 						fs->Close();
-						System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(args[i]);
+						System::IO::StreamReader^ readFile = gcnew System::IO::StreamReader(EXEPath + "\\ReadMe.txt");
 						int HintNum = 0;
 						bool FindHint = false;
 						while (!readFile->EndOfStream)
@@ -89,7 +89,7 @@ int main(array<System::String ^> ^args)
 								try
 								{
 									System::Text::ASCIIEncoding^ asciiEncoding = gcnew System::Text::ASCIIEncoding;
-									fs = gcnew IO::FileStream(args[i], IO::FileMode::Append);
+									fs = gcnew IO::FileStream(EXEPath + "\\ReadMe.txt", IO::FileMode::Append);
 									fs->Write(asciiEncoding->GetBytes(strNewHint), 0, asciiEncoding->GetByteCount(strNewHint));
 									break;
 								}
@@ -109,7 +109,7 @@ int main(array<System::String ^> ^args)
 						String^ EXName = FileName[1]->ToUpper();
 						if (!EXName->Equals("RAW")) //檢查副檔名是否為raw圖
 						{
-							Console::WriteLine(FileName[0] + " is not raw image.");
+							Console::WriteLine(FileName[0] + " is not image.");
 							system("PAUSE");
 						}
 						else
