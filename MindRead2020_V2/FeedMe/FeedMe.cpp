@@ -110,7 +110,10 @@ int main(array<System::String ^> ^args)
 				FileName = FileName[FileName->Length - 1]->Split('.');
 				if (FileName[1]->ToUpper() != "RAW") //檢查副檔名是否為raw圖
 				{
-					Console::WriteLine("嚼嚼～");
+					Windows::Forms::MessageBox::Show("(嚼嚼～",
+						"什麼也沒留下",
+						MessageBoxButtons::OK,
+						MessageBoxIcon::None);
 				}
 				else
 				{

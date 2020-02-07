@@ -59,15 +59,18 @@ int main(array<System::String ^> ^args)
 							realData = gcnew array<Byte>(width);
 							int idx = 0;
 							bool xmlPass = true;
+							Console::WriteLine(loadData[loadData->Length - 1]);
+							Console::WriteLine(loadData[loadData->Length - 2]);
+							system("PAUSE");
 							for (int i = 0; i < loadData->Length; i++)
 							{
-								if (loadData[i] != ' ')
+								if (loadData[i] != ' ' && loadData[i] != '\r\n' && loadData[i] != '\r'&& loadData[i] != '\n')
 								{
 									if (idx >= width)
 									{
 										Console::WriteLine("【寬好像不合哦？】");
 										system("PAUSE");
-
+										xmlPass = false;
 										break;
 									}
 									realData[idx] = loadData[i];
@@ -77,7 +80,7 @@ int main(array<System::String ^> ^args)
 
 							if (!xmlPass)
 							{
-								Console::WriteLine("【看來還沒準備好呢～】");
+								Console::WriteLine("【看來還沒準備好呢～】 ");
 								system("PAUSE");
 								break;
 							}
@@ -115,6 +118,7 @@ int main(array<System::String ^> ^args)
 							{
 								Console::WriteLine("《資料與鑰匙不匹配》");
 								system("PAUSE");
+								break;
 							}
 							else
 							{
@@ -139,6 +143,7 @@ int main(array<System::String ^> ^args)
 								system("PAUSE");
 								Console::WriteLine("【看來檔案中的資料是錯的呢，重新再來過吧。】");
 								system("PAUSE");
+								break;
 							}
 							MRFun->ASCII8bitToLetter(encodeString, outString);
 
@@ -253,8 +258,9 @@ int main(array<System::String ^> ^args)
 						break;
 					}
 				}
+				break;
 			}
-		} while (1);
+		} while (0);
 	}
 	catch (Exception^ e)
 	{
